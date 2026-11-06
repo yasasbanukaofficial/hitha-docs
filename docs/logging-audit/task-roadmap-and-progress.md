@@ -12,6 +12,14 @@ import TabItem from '@theme/TabItem';
 
 This roadmap tracks the exact engineering execution slices implementing the Enterprise Dual-Plane Logging & Audit Architecture in `HITHA-SERVER`.
 
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/cloudflare-r2-archival.svg" alt="Cold Storage JSONL.gz Streaming Pipeline to Cloudflare R2" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 7.0:</b> Cloudflare R2 Cold Archival Pipeline &amp; SHA-256 Manifest (LOG-05)</span>
+    <span className="arch-diagram-badge">LOG-05 &amp; CLOUDFLARE R2</span>
+  </div>
+</div>
+
 ---
 
 ## 📊 Live Execution Progress Matrix

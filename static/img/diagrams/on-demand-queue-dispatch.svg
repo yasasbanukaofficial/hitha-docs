@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="queueBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#04151b" />
+      <stop offset="100%" stop-color="#02090c" />
+    </linearGradient>
+    <linearGradient id="lockGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00a8b5" stop-opacity="0.2" />
+      <stop offset="100%" stop-color="#4caf50" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="360" rx="16" fill="url(#queueBg)" stroke="#0f373d" stroke-width="1.5" />
+
+  <!-- 1. Patient Presses Call Now -->
+  <rect x="35" y="110" width="160" height="120" rx="12" fill="#061f23" stroke="#00a8b5" stroke-width="1.5"/>
+  <text x="50" y="140" fill="#00a8b5" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="700">PATIENT IN CRISIS</text>
+  <text x="50" y="165" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">"Call Now" Action</text>
+  <text x="50" y="185" fill="#7c97af" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Selects Initial Duration</text>
+  <text x="50" y="205" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="10">15m / 30m / 45m (CALL-EXT-01)</text>
+
+  <!-- Arrow to Queue Table -->
+  <path d="M 195 170 L 260 170" stroke="#00a8b5" stroke-width="2" />
+  <polygon points="260,170 252,165 252,175" fill="#00a8b5" />
+
+  <!-- 2. On-Demand Dispatch Scheduler -->
+  <rect x="260" y="80" width="250" height="200" rx="14" fill="url(#lockGrad)" stroke="#00a8b5" stroke-width="1.5"/>
+  <rect x="275" y="95" width="135" height="20" rx="4" fill="#00a8b5" fill-opacity="0.2"/>
+  <text x="282" y="109" fill="#00a8b5" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">DISPATCH SCHEDULER</text>
+  <text x="275" y="135" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">WaitingQueueDispatcher</text>
+
+  <rect x="275" y="150" width="220" height="34" rx="6" fill="#041221" stroke="#ef4444"/>
+  <text x="285" y="166" fill="#f87171" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">Pessimistic Row Lock</text>
+  <text x="285" y="178" fill="#cbd5e1" font-family="'JetBrains Mono', monospace" font-size="10">SELECT ... FOR UPDATE</text>
+
+  <rect x="275" y="194" width="220" height="34" rx="6" fill="#041221" stroke="#00838d"/>
+  <text x="285" y="210" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">Doctor Presence Pool</text>
+  <text x="285" y="222" fill="#7c97af" font-family="'JetBrains Mono', monospace" font-size="10">Redis "Go On-Duty" status</text>
+
+  <text x="275" y="255" fill="#00a8b5" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">✓ Zero race condition dispatch</text>
+
+  <!-- Arrow to Doctor Ringing -->
+  <path d="M 510 170 L 575 170" stroke="#4caf50" stroke-width="2" />
+  <polygon points="575,170 567,165 567,175" fill="#4caf50" />
+
+  <!-- 3. Doctor App Ringing -->
+  <rect x="575" y="100" width="190" height="150" rx="12" fill="#061b30" stroke="#4caf50" stroke-width="1.5"/>
+  <rect x="590" y="115" width="28" height="28" rx="6" fill="#4caf50" fill-opacity="0.2"/>
+  <text x="598" y="135" fill="#4caf50" font-size="14">👨‍⚕️</text>
+  <text x="626" y="128" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">Duty Doctor</text>
+  <text x="626" y="144" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="10">State: RINGING</text>
+
+  <rect x="590" y="160" width="160" height="30" rx="6" fill="#0a2a1a" stroke="#4caf50"/>
+  <text x="600" y="180" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">45s Acceptance Window</text>
+
+  <text x="590" y="215" fill="#7c97af" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">If timeout: Re-routes to next</text>
+  <text x="590" y="232" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600">If accepted: LiveKit room starts</text>
+</svg>

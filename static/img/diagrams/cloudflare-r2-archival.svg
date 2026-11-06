@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="cloudBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#05141f" />
+      <stop offset="100%" stop-color="#02090e" />
+    </linearGradient>
+    <linearGradient id="r2Grad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f38020" stop-opacity="0.25" />
+      <stop offset="100%" stop-color="#faad3f" stop-opacity="0.05" />
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="360" rx="16" fill="url(#cloudBg)" stroke="#13364f" stroke-width="1.5" />
+
+  <!-- 1. PostgreSQL Hot Partition -->
+  <rect x="35" y="110" width="190" height="140" rx="12" fill="#061b30" stroke="#00a8b5" stroke-width="1.5"/>
+  <rect x="50" y="125" width="28" height="28" rx="6" fill="#00a8b5" fill-opacity="0.2"/>
+  <text x="58" y="144" fill="#00a8b5" font-size="14">🐘</text>
+  <text x="88" y="138" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">PostgreSQL 16</text>
+  <text x="88" y="154" fill="#7c97af" font-family="'JetBrains Mono', monospace" font-size="10">Hot Audit Partitions</text>
+  
+  <rect x="50" y="170" width="160" height="26" rx="4" fill="#041221" stroke="#1c5686"/>
+  <text x="60" y="187" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="10">audit_logs_y2026m10</text>
+  <text x="50" y="225" fill="#7c97af" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Active 90-day retention</text>
+
+  <!-- Arrow to Archiver Scheduler -->
+  <path d="M 225 180 L 295 180" stroke="#00a8b5" stroke-width="2" />
+  <polygon points="295,180 287,175 287,185" fill="#00a8b5" />
+
+  <!-- 2. AuditLogArchiveService (LOG-05) -->
+  <rect x="295" y="80" width="220" height="200" rx="14" fill="#061f23" stroke="#00a8b5" stroke-width="1.5"/>
+  <rect x="310" y="95" width="125" height="20" rx="4" fill="#00a8b5" fill-opacity="0.2"/>
+  <text x="316" y="109" fill="#00a8b5" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">AUDIT ARCHIVER (LOG-05)</text>
+  <text x="310" y="135" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">Streaming GZIP Pipeline</text>
+
+  <rect x="310" y="150" width="190" height="30" rx="6" fill="#041221" stroke="#00838d"/>
+  <text x="320" y="170" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">1. Stream records to .jsonl</text>
+
+  <rect x="310" y="190" width="190" height="30" rx="6" fill="#041221" stroke="#00838d"/>
+  <text x="320" y="210" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">2. Compute SHA-256 Manifest</text>
+
+  <rect x="310" y="230" width="190" height="30" rx="6" fill="#041221" stroke="#00838d"/>
+  <text x="320" y="250" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">3. Compress with GZIP Level 9</text>
+
+  <!-- Arrow to Cloudflare R2 -->
+  <path d="M 515 180 L 575 180" stroke="#f38020" stroke-width="2" />
+  <polygon points="575,180 567,175 567,185" fill="#f38020" />
+
+  <!-- 3. Cloudflare R2 Cold Storage -->
+  <rect x="575" y="90" width="195" height="180" rx="14" fill="url(#r2Grad)" stroke="#f38020" stroke-width="2"/>
+  <rect x="590" y="105" width="30" height="30" rx="6" fill="#f38020" fill-opacity="0.2"/>
+  <text x="598" y="125" fill="#f38020" font-size="14">☁️</text>
+  <text x="630" y="118" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">Cloudflare R2</text>
+  <text x="630" y="134" fill="#faad3f" font-family="'JetBrains Mono', monospace" font-size="10">S3 API Compatible</text>
+
+  <rect x="590" y="150" width="165" height="36" rx="6" fill="#180e05" stroke="#f38020" stroke-width="1"/>
+  <text x="598" y="167" fill="#f8fafc" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="600">audit-2026-10.jsonl.gz</text>
+  <text x="598" y="180" fill="#faad3f" font-family="'JetBrains Mono', monospace" font-size="9">SHA-256: 4f9e...2a1b</text>
+
+  <text x="590" y="215" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="11" font-weight="600">7-Year Compliance Retention</text>
+  <text x="590" y="232" fill="#7c97af" font-family="'Plus Jakarta Sans', sans-serif" font-size="10">WORM: Write Once, Read Many</text>
+  <text x="590" y="248" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="10">Zero egress fees for audits</text>
+</svg>

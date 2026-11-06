@@ -5,12 +5,18 @@ sidebar_label: RBAC & Super Admin Security
 slug: /security/rbac-superadmin
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
 
 # Role-Based Access Control (RBAC) & Super Admin Governance
 
 HITHA strictly segregates user roles to guarantee patient privacy, clinical confidentiality, and financial auditability.
+
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/user-registration-flow.svg" alt="User Registration &amp; Role Provisioning Flow" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 6.0:</b> User Registration, Password Hash &amp; Role Provisioning Flow</span>
+    <span className="arch-diagram-badge">SEC-04 &amp; AUTH</span>
+  </div>
+</div>
 
 ---
 
@@ -27,21 +33,5 @@ HITHA strictly segregates user roles to guarantee patient privacy, clinical conf
 
 ## 🔒 The Pseudonymous Pointer Pattern (PDPA / GDPR Right-to-Erasure)
 
-<Tabs>
-<TabItem value="sinhala" label="📖 සරල සිංහලෙන් (Plain Sinhala)" default>
-
-- **නීතිමය ගැටලුව**: GDPR සහ ශ්‍රී ලංකා PDPA නීතිය අනුව patient කෙනෙක්ට තමන්ගේ account එක සම්පූර්ණයෙන්ම delete කරන්න අයිතියක් තියෙනවා (Right-to-Erasure). හැබැයි නීතිය අනුවම Audit logs අවුරුදු 7ක් තියාගන්නත් ඕනේ. Account එක delete කරද්දී audit log එකේ තිබ්බ user details delete කළොත්, SHA-256 Hash chain එක කැඩෙනවා.
-- **අපේ විසඳුම (Pseudonymous Pointer)**: Audit log table එකේ Patient ගේ නම, phone number එක ලියන්නේ නැත. ලියන්නේ Random UUID එකක් විතරයි (`patientId`). User account එක delete කළ විට, authentication table එකේ ඇති ඔහුගේ නම/ගම Shred (Delete) කර දමයි. Audit log එකේ UUID එක නොවෙනස්ව පවතින නිසා, Hash Chain එක බිඳෙන්නේ නැතිව audit verification 100% ආරක්ෂා වේ.
-
-
-
-</TabItem>
-<TabItem value="english" label="💡 Technical Defense (English)">
-
 - **The Conflict**: Data privacy laws mandate the deletion of personally identifiable information (PII) upon patient request. However, financial and medical laws require 7-year immutable audit ledgers. Modifying an audit row to erase a name invalidates its cryptographic SHA-256 hash.
 - **The Solution**: Audit tables maintain only pseudonymous UUID foreign references (`actorId`, `patientId`) without cascade delete rules. When an erasure request is executed, the user record in `auth_users` is cryptographically shredded, but the immutable audit row with its UUID remains intact, preserving continuous cryptographic hash-chain verification.
-
-
-
-</TabItem>
-</Tabs>

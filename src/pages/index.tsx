@@ -16,13 +16,20 @@ import {
   Cpu,
   Lock,
   Clock,
-  Sparkles
+  Sparkles,
+  Video,
+  PhoneCall,
+  Radio,
+  FileCode,
+  Github,
+  HelpCircle,
+  ExternalLink,
+  Users
 } from 'lucide-react';
 
 export default function Home(): React.JSX.Element {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
-  // Global hotkey Ctrl+K / Cmd+K / Slash to open modal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
@@ -40,287 +47,169 @@ export default function Home(): React.JSX.Element {
   return (
     <Layout
       title="HITHA Architecture & Engineering Portal"
-      description="Interactive Architecture, Dual-Plane Logging, Rate Limiting & Technical Glossary">
+      description="Production Blueprints, Dual-Plane Logging, LiveKit WebRTC & Distributed Architecture">
       
-      {/* Interactive Command Search Modal */}
       <CommandSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
       <main className="landing-root">
-        {/* Modern Hero Section */}
+        {/* ========================================================
+            SECTION 1: HERO "Build with HITHA"
+            ======================================================== */}
         <section className="hero-section">
           <div className="hero-glow-radial"></div>
 
           <div className="hero-container">
-            {/* Top Eyebrow Badge */}
             <div className="hero-eyebrow">
               <span className="hero-eyebrow-dot"></span>
-              <span>Enterprise Telehealth Distributed System</span>
-              <span className="hero-eyebrow-pill">Production Architecture</span>
+              <span>Enterprise Telehealth Platform</span>
+              <span className="hero-eyebrow-pill">Docusaurus Reference</span>
             </div>
 
-            {/* Main Headline */}
             <h1 className="hero-heading">
-              HITHA Architecture <br />
-              <span className="hero-gradient-text">& Engineering Portal</span>
+              Build with HITHA <br />
+              <span className="hero-gradient-text">Healthcare Distributed System</span>
             </h1>
 
             <p className="hero-description">
-              Production blueprints, dual-plane logging lifecycles, distributed rate limiting, 
-              and technical specifications explained with concrete real scenarios and conversational Sinhala breakdowns.
+              Production blueprints, dual-plane logging pipelines, distributed rate limiting, 
+              and WebRTC telehealth engines built with Spring Boot 3.3, PostgreSQL 16, and Java 21 Virtual Threads.
             </p>
 
-            {/* Interactive Spotlight Search Trigger */}
+            {/* Spotlight Search Trigger */}
             <div className="hero-search-wrapper" onClick={() => setIsSearchOpen(true)}>
               <div className="hero-search-bar">
                 <div className="hero-search-left">
                   <Search className="hero-search-icon" />
                   <span className="hero-search-placeholder">
-                    Search architecture, SQL queries, concepts, or Sinhala guides...
+                    Search architecture, SQL queries, concepts, or guides...
                   </span>
                 </div>
                 <div className="hero-search-right">
                   <kbd className="hero-search-kbd">⌘K</kbd>
-                  <span className="hero-search-hint">or press <kbd className="hero-search-kbd">/</kbd></span>
+                  <span className="hero-search-hint">or <kbd className="hero-search-kbd">/</kbd></span>
                 </div>
               </div>
             </div>
 
-            {/* Quick Filter Tag Buttons */}
-            <div className="hero-tags">
-              <span className="hero-tags-label">Quick Jump:</span>
-              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
-                <Zap className="w-3.5 h-3.5 text-amber-400" />
-                <span>Dual-Plane Logging</span>
-              </button>
-              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
-                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
-                <span>4-Tier Rate Limiting</span>
-              </button>
-              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
-                <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
-                <span>LiveKit WebRTC</span>
-              </button>
-              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
-                <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Escrow Wallet</span>
-              </button>
-              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
-                <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
-                <span>Technical Terms (සිංහල)</span>
-              </button>
+            {/* 3 Core Capability Cards (Live Video, Emergency Calls, Interactive Queue) */}
+            <div className="hero-feature-cards-grid">
+              <Link to="/docs/clinical/livekit-webrtc" className="hero-card-link">
+                <div className="hero-card-icon cyan">
+                  <Video className="w-6 h-6" />
+                </div>
+                <h3 className="hero-card-title">Live Video Consultations</h3>
+                <p className="hero-card-desc">
+                  Sub-200ms WebRTC consultation rooms powered by LiveKit SFU with in-call dynamic 15m/30m/45m extensions.
+                </p>
+                <span className="hero-card-cta">Explore LiveKit Engine →</span>
+              </Link>
+
+              <Link to="/docs/clinical/on-demand-queue" className="hero-card-link">
+                <div className="hero-card-icon emerald">
+                  <PhoneCall className="w-6 h-6" />
+                </div>
+                <h3 className="hero-card-title">Emergency Doctor Dispatch</h3>
+                <p className="hero-card-desc">
+                  Instant doctor assignment using Redis presence pools and PostgreSQL pessimistic row locking (<code className="hero-inline-code">SELECT FOR UPDATE</code>).
+                </p>
+                <span className="hero-card-cta">View Queue Dispatcher →</span>
+              </Link>
+
+              <Link to="/docs/logging-audit/dual-plane-architecture" className="hero-card-link">
+                <div className="hero-card-icon amber">
+                  <Terminal className="w-6 h-6" />
+                </div>
+                <h3 className="hero-card-title">Dual-Plane Logging</h3>
+                <p className="hero-card-desc">
+                  Zero database bloat: 5GB local rolling debug logs paired with SHA-256 tamper-proof clinical compliance logs.
+                </p>
+                <span className="hero-card-cta">Inspect Dual-Plane Model →</span>
+              </Link>
             </div>
           </div>
         </section>
 
-        {/* Feature Grid / Core Domains */}
-        <section className="domains-section">
-          <div className="domains-container">
-            <div className="domains-header">
-              <div className="domains-header-left">
-                <span className="section-badge">Core Domains</span>
-                <h2 className="section-title">Explore Production Architecture</h2>
+        {/* ========================================================
+            SECTION 2: POPULAR HOW-TO GUIDES
+            ======================================================== */}
+        <section className="guides-section">
+          <div className="section-container">
+            <div className="section-header-flex">
+              <div>
+                <span className="section-eyebrow-badge">Popular How-To Guides</span>
+                <h2 className="section-main-heading">Core Engineering Guides</h2>
               </div>
-              <Link to="/docs/" className="view-all-link">
-                <span>Browse all 19 chapters</span>
+              <Link to="/docs/" className="section-view-all">
+                <span>View all guides</span>
                 <ArrowRight className="w-4 h-4 ml-1" />
               </Link>
             </div>
 
-            <div className="cards-grid">
-              {/* Card 1: Logging & Audit */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box amber">
-                    <Terminal className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">LOG-01 — LOG-10</span>
-                </div>
-                <h3 className="card-title">Dual-Plane Logging & Audit Architecture</h3>
-                <p className="card-desc">
-                  Separates high-frequency operational logs (capped 5GB local rolling files) from legally-binding clinical audit logs (SHA-256 hash chained, PostgreSQL partitioned tables, and 7-year Cloudflare R2 cold WORM archival).
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Zap className="w-4 h-4 text-amber-400" />
-                    <span>PostgreSQL Advisory Locks for SHA-256 hash chaining</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <Cpu className="w-4 h-4 text-amber-400" />
-                    <span>HikariCP 401 connection exhaustion defense</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/logging-audit/dual-plane-architecture" className="card-btn-primary">
-                    <span>Architecture Guide</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/logging-audit/deep-technical-mechanisms" className="card-btn-secondary">
-                    Q&A Defense
+            <div className="guides-cards-grid">
+              <Link to="/docs/logging-audit/dual-plane-architecture" className="guide-card">
+                <h4 className="guide-card-title">How to Configure Dual-Plane Logging &amp; Auto-Eviction</h4>
+                <p className="guide-card-desc">Enforce 100MB/hourly gzip rolling and 5GB disk cap with Logback AsyncAppender.</p>
+              </Link>
+
+              <Link to="/docs/security/rate-limiting" className="guide-card">
+                <h4 className="guide-card-title">How to Set Up 4-Tier Distributed Rate Limiting</h4>
+                <p className="guide-card-desc">Protect HikariCP connection pools with Bucket4j pre-authentication filters.</p>
+              </Link>
+
+              <Link to="/docs/financial/doctor-wallet-escrow" className="guide-card">
+                <h4 className="guide-card-title">How the Escrow Custody Ledger Settles Earnings</h4>
+                <p className="guide-card-desc">Hold patient consultation payments in escrow until explicit clinical sign-off.</p>
+              </Link>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            SECTION 3: SAMPLE IMPLEMENTATIONS & FLOW DIAGRAMS
+            ======================================================== */}
+        <section className="sample-apps-section">
+          <div className="section-container">
+            <div className="section-header-flex">
+              <div>
+                <span className="section-eyebrow-badge">Production Architecture</span>
+                <h2 className="section-main-heading">Visual Architecture Schematics</h2>
+              </div>
+              <Link to="/docs/logging-audit/task-roadmap-and-progress" className="section-view-all">
+                <span>View Roadmap (LOG-01 to LOG-10)</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+
+            <div className="sample-apps-grid">
+              <div className="sample-app-card">
+                <div className="sample-card-badge">Figure 1.0</div>
+                <h4>Dual-Plane Logging Pipeline</h4>
+                <p>Separates Plane A (5GB local files) from Plane B (PostgreSQL hot table + Cloudflare R2 WORM cold archive).</p>
+                <div className="sample-card-actions">
+                  <Link to="/docs/logging-audit/dual-plane-architecture" className="sample-action-link">
+                    Open Diagram →
                   </Link>
                 </div>
               </div>
 
-              {/* Card 2: Security & Rate Limiting */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box rose">
-                    <ShieldCheck className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">SEC-01 — SEC-04</span>
-                </div>
-                <h3 className="card-title">Distributed Rate Limiting & Auth</h3>
-                <p className="card-desc">
-                  4-tier distributed Bucket4j token bucket rate limiting protecting HikariCP pools from DoS, combined with seamless SSE JWT renew handshakes and RBAC Super Admin governance.
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Lock className="w-4 h-4 text-rose-400" />
-                    <span>Zero-touch SSE token rotation without disconnection</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <ShieldCheck className="w-4 h-4 text-rose-400" />
-                    <span>Clinical fail-open rule with atomic rate limit logging</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/security/rate-limiting" className="card-btn-primary">
-                    <span>Rate Limiting Specs</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/security/sse-token-refresh" className="card-btn-secondary">
-                    SSE Lifecycle
+              <div className="sample-app-card">
+                <div className="sample-card-badge">Figure 2.0</div>
+                <h4>Bucket4j Rate Limiter Tiers</h4>
+                <p>Pre-authentication filter layer dropping malicious bursts with zero JDBC connection overhead.</p>
+                <div className="sample-card-actions">
+                  <Link to="/docs/security/rate-limiting" className="sample-action-link">
+                    Open Diagram →
                   </Link>
                 </div>
               </div>
 
-              {/* Card 3: Clinical & Real-Time */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box cyan">
-                    <Stethoscope className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">RTC-01 — RTC-03</span>
-                </div>
-                <h3 className="card-title">Clinical RTC & Emergency Queue</h3>
-                <p className="card-desc">
-                  LiveKit SFU WebRTC encrypted rooms with mid-call duration extensions (15m, 30m, 45m), paired with pessimistic SELECT FOR UPDATE emergency doctor dispatch.
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Zap className="w-4 h-4 text-cyan-400" />
-                    <span>Redis presence pool for active on-duty doctors</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <Database className="w-4 h-4 text-cyan-400" />
-                    <span>Drug catalog with Zero-PHI audit compliance</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/clinical/livekit-webrtc" className="card-btn-primary">
-                    <span>WebRTC Engine</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/clinical/on-demand-queue" className="card-btn-secondary">
-                    Emergency Dispatch
-                  </Link>
-                </div>
-              </div>
-
-              {/* Card 4: Financial & Escrow */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box emerald">
-                    <DollarSign className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">PAY-01 — PAY-03</span>
-                </div>
-                <h3 className="card-title">Doctor Escrow & PayHere Webhooks</h3>
-                <p className="card-desc">
-                  Multi-account double-entry ledger with automated 15% platform commission deduction and idempotent PayHere webhook signatures using MD5 checksum validation.
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Lock className="w-4 h-4 text-emerald-400" />
-                    <span>Escrow funds locked until consultation sign-off</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <Layers className="w-4 h-4 text-emerald-400" />
-                    <span>Monthly subscription quota ledger with rollover guards</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/financial/doctor-wallet-escrow" className="card-btn-primary">
-                    <span>Escrow Ledger</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/financial/payhere-webhook-idempotency" className="card-btn-secondary">
-                    Webhook Verification
-                  </Link>
-                </div>
-              </div>
-
-              {/* Card 5: Engineering Glossary & Dictionary */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box indigo">
-                    <BookOpen className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">GLOSSARY & TIMELINE</span>
-                </div>
-                <h3 className="card-title">Technical Terms Dictionary (සිංහල & English)</h3>
-                <p className="card-desc">
-                  24+ advanced architectural concepts (Pessimistic Locking, WORM, Hash Chain, BRIN Index, Outbox DLQ) explained using everyday real-world analogies and clear Sinhala breakdowns.
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Sparkles className="w-4 h-4 text-indigo-400" />
-                    <span>Zero confusing jargon — simplified for instant understanding</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <Clock className="w-4 h-4 text-indigo-400" />
-                    <span>Real daily engineering timeline with live git commits</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/reference/technical-terms-dictionary" className="card-btn-primary">
-                    <span>Terms Dictionary</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/engineering-timeline/daily-timeline" className="card-btn-secondary">
-                    Engineering Timeline
-                  </Link>
-                </div>
-              </div>
-
-              {/* Card 6: Database & Caching Optimization */}
-              <div className="feature-card">
-                <div className="card-top">
-                  <div className="card-icon-box violet">
-                    <Database className="w-6 h-6" />
-                  </div>
-                  <span className="card-status-badge">DB-01 — DB-04</span>
-                </div>
-                <h3 className="card-title">Database Indexing & Multi-Tier Caching</h3>
-                <p className="card-desc">
-                  Sub-10ms query optimization using PostgreSQL BRIN indexes for append-only logs, dropping heavy GIN indexes, Redis 7 token caching, and Transactional Outbox pattern with DLQ.
-                </p>
-                <div className="card-features-list">
-                  <div className="card-feature-item">
-                    <Zap className="w-4 h-4 text-violet-400" />
-                    <span>BRIN index: 95% smaller index footprint than B-Tree</span>
-                  </div>
-                  <div className="card-feature-item">
-                    <Cpu className="w-4 h-4 text-violet-400" />
-                    <span>60-second in-memory doctor dashboard cache TTL</span>
-                  </div>
-                </div>
-                <div className="card-actions">
-                  <Link to="/docs/reference/database-indexing-optimization" className="card-btn-primary">
-                    <span>Indexing Strategy</span>
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </Link>
-                  <Link to="/docs/reference/caching-architecture" className="card-btn-secondary">
-                    Caching Architecture
+              <div className="sample-app-card">
+                <div className="sample-card-badge">Figure 7.0</div>
+                <h4>Cloudflare R2 Cold Archival</h4>
+                <p>Streaming historical audit records to .jsonl.gz archives with SHA-256 manifests (LOG-05).</p>
+                <div className="sample-card-actions">
+                  <Link to="/docs/logging-audit/task-roadmap-and-progress" className="sample-action-link">
+                    Open Diagram →
                   </Link>
                 </div>
               </div>
@@ -328,38 +217,146 @@ export default function Home(): React.JSX.Element {
           </div>
         </section>
 
-        {/* Quick Architecture Execution Flow Section */}
-        <section className="architecture-flow-section">
-          <div className="architecture-flow-container">
-            <div className="flow-card">
-              <div className="flow-card-badge">System Overview</div>
-              <h2 className="flow-title">Multi-Tier Distributed Healthcare Topology</h2>
-              <p className="flow-subtitle">
-                High-availability request routing, edge security, asynchronous event streaming, and 7-year immutable audit storage.
-              </p>
+        {/* ========================================================
+            SECTION 4: FRAMEWORK & PLATFORM INTEGRATION
+            ======================================================== */}
+        <section className="framework-section">
+          <div className="section-container">
+            <h2 className="framework-heading">Build the way you want in the framework you want!</h2>
+            <p className="framework-subtitle">
+              HITHA provides native SDKs and backend micro-integrations across all major client platforms.
+            </p>
 
-              <div className="flow-steps-grid">
-                <div className="flow-step-box">
-                  <div className="flow-step-num">01</div>
-                  <h4>Edge & Client Layer</h4>
-                  <p>Flutter Mobile Apps & Next.js Web Portal route via Cloudflare with DDoS protection and token bucket rate limits.</p>
+            <div className="framework-boxes-grid">
+              <div className="framework-box">
+                <div className="framework-box-header">
+                  <span className="framework-box-badge">UI Kit</span>
+                  <h3>Clinical Frontend UI Components</h3>
+                  <p>Pre-built video lobby, doctor consulting controls, and E-Prescription modules.</p>
                 </div>
-                <div className="flow-step-box">
-                  <div className="flow-step-num">02</div>
-                  <h4>Virtual Thread Backend</h4>
-                  <p>Spring Boot 3.3 running on Java 21 Virtual Threads, handling 10,000+ concurrent telehealth calls with minimal thread overhead.</p>
-                </div>
-                <div className="flow-step-box">
-                  <div className="flow-step-num">03</div>
-                  <h4>Dual-Plane Storage</h4>
-                  <p>Local 5GB rolling logs for fast debug triage + PostgreSQL 16 partitioned tables with SHA-256 tamper-proof chaining.</p>
-                </div>
-                <div className="flow-step-box">
-                  <div className="flow-step-num">04</div>
-                  <h4>Cold Compliance Archive</h4>
-                  <p>Automated monthly partition detach and gzip streaming to Cloudflare R2 bucket with 7-year WORM immutability.</p>
+                <div className="framework-pills-row">
+                  <span className="framework-pill">Flutter Mobile</span>
+                  <span className="framework-pill">Next.js Web</span>
+                  <span className="framework-pill">React 18</span>
+                  <span className="framework-pill">Tailwind CSS</span>
                 </div>
               </div>
+
+              <div className="framework-box">
+                <div className="framework-box-header">
+                  <span className="framework-box-badge core">Core Engine</span>
+                  <h3>High-Performance Microservices</h3>
+                  <p>Zero-overhead Virtual Threads handling 10,000+ concurrent telehealth sessions.</p>
+                </div>
+                <div className="framework-pills-row">
+                  <span className="framework-pill">Spring Boot 3.3</span>
+                  <span className="framework-pill">Java 21 Virtual Threads</span>
+                  <span className="framework-pill">PostgreSQL 16 (BRIN)</span>
+                  <span className="framework-pill">Redis 7 Cluster</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            SECTION 5: REST API REFERENCE OVERVIEW
+            ======================================================== */}
+        <section className="api-preview-section">
+          <div className="section-container">
+            <div className="api-preview-grid">
+              <div className="api-preview-left">
+                <span className="section-eyebrow-badge">REST API Reference</span>
+                <h2 className="api-preview-title">HITHA Core Telehealth APIs</h2>
+                <p className="api-preview-desc">
+                  Idempotent payment endpoints, real-time consultation dispatch, LiveKit room tokens, and tamper-proof audit verification APIs.
+                </p>
+                <Link to="/docs/financial/payhere-webhook-idempotency" className="api-preview-cta">
+                  <span>Explore Payment &amp; Escrow APIs</span>
+                  <ArrowRight className="w-4 h-4 ml-1.5" />
+                </Link>
+
+                <div className="api-endpoints-list">
+                  <Link to="/docs/clinical/livekit-webrtc" className="api-endpoint-row">
+                    <span className="api-method post">POST</span>
+                    <span className="api-path">/api/v1/clinical/consultations/create-room</span>
+                    <ArrowRight className="w-4 h-4 api-row-arrow" />
+                  </Link>
+
+                  <Link to="/docs/clinical/on-demand-queue" className="api-endpoint-row">
+                    <span className="api-method post">POST</span>
+                    <span className="api-path">/api/v1/on-demand/call-now</span>
+                    <ArrowRight className="w-4 h-4 api-row-arrow" />
+                  </Link>
+
+                  <Link to="/docs/financial/payhere-webhook-idempotency" className="api-endpoint-row">
+                    <span className="api-method post">POST</span>
+                    <span className="api-path">/api/v1/payments/payhere/notify</span>
+                    <ArrowRight className="w-4 h-4 api-row-arrow" />
+                  </Link>
+                </div>
+              </div>
+
+              <div className="api-preview-right">
+                <div className="api-code-window">
+                  <div className="window-header">
+                    <div className="window-dots">
+                      <span className="dot red"></span>
+                      <span className="dot yellow"></span>
+                      <span className="dot green"></span>
+                    </div>
+                    <span className="window-title">ConsultationSessionResponse.json</span>
+                  </div>
+                  <pre className="window-code">
+{`{
+  "bookingId": "bk_987214e2",
+  "roomName": "room_conf_c47890",
+  "patientToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "doctorToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...",
+  "sessionDuration": 1800,
+  "escrowStatus": "HELD_IN_CUSTODY",
+  "escrowAmount": 3500.00,
+  "currency": "LKR",
+  "auditProof": {
+    "chainIndex": 14209,
+    "sha256Hash": "8f3b2a9e10d4817c...",
+    "storagePlane": "PLANE_B_POSTGRES"
+  }
+}`}
+                  </pre>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ========================================================
+            SECTION 6: HOW CAN WE HELP YOU TODAY?
+            ======================================================== */}
+        <section className="help-section">
+          <div className="section-container">
+            <h2 className="help-heading">Engineering &amp; Support Resources</h2>
+            <div className="help-cards-grid">
+              <Link to="/docs/reference/technical-terms-dictionary" className="help-card">
+                <BookOpen className="w-6 h-6 text-cyan-400 mb-3" />
+                <h3>Architecture Glossary</h3>
+                <p>24+ technical terms (BRIN index, WORM storage, Escrow custody, Outbox DLQ) explained with codebase pointers.</p>
+                <span className="help-card-link">Read Glossary →</span>
+              </Link>
+
+              <Link to="/docs/engineering-timeline/daily-timeline" className="help-card">
+                <Clock className="w-6 h-6 text-emerald-400 mb-3" />
+                <h3>Daily Engineering Timeline</h3>
+                <p>Review the exact commits, tests, and deliverables merged into the Hitha server today.</p>
+                <span className="help-card-link">View Timeline →</span>
+              </Link>
+
+              <Link to="/docs/logging-audit/deep-technical-mechanisms" className="help-card">
+                <ShieldCheck className="w-6 h-6 text-amber-400 mb-3" />
+                <h3>Deep Mechanism Q&amp;A</h3>
+                <p>Technical defense covering hash-chain concurrency, 401 connection pool exhaustion, and indexing trade-offs.</p>
+                <span className="help-card-link">Inspect Q&amp;A →</span>
+              </Link>
             </div>
           </div>
         </section>
