@@ -1,115 +1,366 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import CommandSearchModal from '../components/CommandSearchModal';
+import { 
+  Search, 
+  Terminal, 
+  ShieldCheck, 
+  Stethoscope, 
+  DollarSign, 
+  BookOpen, 
+  ArrowRight, 
+  Zap, 
+  Layers, 
+  Database,
+  Cpu,
+  Lock,
+  Clock,
+  Sparkles
+} from 'lucide-react';
 
 export default function Home(): React.JSX.Element {
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+  // Global hotkey Ctrl+K / Cmd+K / Slash to open modal
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      } else if (e.key === '/' && document.activeElement?.tagName !== 'INPUT' && document.activeElement?.tagName !== 'TEXTAREA') {
+        e.preventDefault();
+        setIsSearchOpen(true);
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, []);
+
   return (
     <Layout
       title="HITHA Architecture & Engineering Portal"
       description="Interactive Architecture, Dual-Plane Logging, Rate Limiting & Technical Glossary">
-      <main>
-        <section className="heroBanner">
-          <div className="container">
-            <span className="modernCardBadge">Healthcare Distributed Systems</span>
-            <h1 className="heroTitle">HITHA Architecture Portal</h1>
-            <p className="heroSubtitle">
-              Comprehensive architectural guides, live dual-plane logging pipelines, distributed rate limiting, and technical glossary with plain Sinhala and English breakdowns.
-            </p>
+      
+      {/* Interactive Command Search Modal */}
+      <CommandSearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
 
-            {/* Google-Style Center Search Box */}
-            <div className="googleSearchHero">
-              <input
-                type="text"
-                className="googleSearchInput"
-                placeholder="Search architecture, concepts, SQL queries, or Sinhala explanations (e.g. hash chain, dual plane, rate limit)..."
-                onFocus={(e) => {
-                  // Focus the global docusaurus search bar if available
-                  const searchBtn = document.querySelector('.navbar__search input') as HTMLInputElement;
-                  if (searchBtn) {
-                    searchBtn.focus();
-                  }
-                }}
-                onClick={() => {
-                  const searchBtn = document.querySelector('.navbar__search input') as HTMLInputElement;
-                  if (searchBtn) {
-                    searchBtn.focus();
-                  }
-                }}
-              />
-              <span className="googleSearchIcon">🔍</span>
+      <main className="landing-root">
+        {/* Modern Hero Section */}
+        <section className="hero-section">
+          <div className="hero-glow-radial"></div>
+
+          <div className="hero-container">
+            {/* Top Eyebrow Badge */}
+            <div className="hero-eyebrow">
+              <span className="hero-eyebrow-dot"></span>
+              <span>Enterprise Telehealth Distributed System</span>
+              <span className="hero-eyebrow-pill">Production Architecture</span>
             </div>
 
-            {/* Quick Filter Navigation Buttons */}
-            <div style={{display: 'flex', gap: '10px', justifyContent: 'center', flexWrap: 'wrap', marginBottom: '2rem'}}>
-              <Link to="/docs/logging-audit/dual-plane-architecture" className="button button--secondary button--sm" style={{borderRadius: '9999px', padding: '8px 18px'}}>
-                ⚡ Dual-Plane Logging
-              </Link>
-              <Link to="/docs/logging-audit/task-roadmap-and-progress" className="button button--secondary button--sm" style={{borderRadius: '9999px', padding: '8px 18px'}}>
-                🚀 LOG-01 to LOG-10 Progress
-              </Link>
-              <Link to="/docs/security/rate-limiting" className="button button--secondary button--sm" style={{borderRadius: '9999px', padding: '8px 18px'}}>
-                🛡️ Distributed Rate Limiting
-              </Link>
-              <Link to="/docs/reference/technical-terms-dictionary" className="button button--secondary button--sm" style={{borderRadius: '9999px', padding: '8px 18px'}}>
-                📚 Terms Dictionary (සිංහල)
-              </Link>
-              <Link to="/docs/engineering-timeline/daily-timeline" className="button button--secondary button--sm" style={{borderRadius: '9999px', padding: '8px 18px'}}>
-                📅 Engineering Timeline
-              </Link>
+            {/* Main Headline */}
+            <h1 className="hero-heading">
+              HITHA Architecture <br />
+              <span className="hero-gradient-text">& Engineering Portal</span>
+            </h1>
+
+            <p className="hero-description">
+              Production blueprints, dual-plane logging lifecycles, distributed rate limiting, 
+              and technical specifications explained with concrete real scenarios and conversational Sinhala breakdowns.
+            </p>
+
+            {/* Interactive Spotlight Search Trigger */}
+            <div className="hero-search-wrapper" onClick={() => setIsSearchOpen(true)}>
+              <div className="hero-search-bar">
+                <div className="hero-search-left">
+                  <Search className="hero-search-icon" />
+                  <span className="hero-search-placeholder">
+                    Search architecture, SQL queries, concepts, or Sinhala guides...
+                  </span>
+                </div>
+                <div className="hero-search-right">
+                  <kbd className="hero-search-kbd">⌘K</kbd>
+                  <span className="hero-search-hint">or press <kbd className="hero-search-kbd">/</kbd></span>
+                </div>
+              </div>
+            </div>
+
+            {/* Quick Filter Tag Buttons */}
+            <div className="hero-tags">
+              <span className="hero-tags-label">Quick Jump:</span>
+              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
+                <Zap className="w-3.5 h-3.5 text-amber-400" />
+                <span>Dual-Plane Logging</span>
+              </button>
+              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-400" />
+                <span>4-Tier Rate Limiting</span>
+              </button>
+              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
+                <Stethoscope className="w-3.5 h-3.5 text-cyan-400" />
+                <span>LiveKit WebRTC</span>
+              </button>
+              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
+                <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+                <span>Escrow Wallet</span>
+              </button>
+              <button className="hero-tag-btn" onClick={() => setIsSearchOpen(true)}>
+                <BookOpen className="w-3.5 h-3.5 text-indigo-400" />
+                <span>Technical Terms (සිංහල)</span>
+              </button>
             </div>
           </div>
         </section>
 
-        {/* Feature Cards Grid */}
-        <section className="container" style={{paddingBottom: '4rem'}}>
-          <div className="cardGrid">
-            <Link to="/docs/logging-audit/dual-plane-architecture" className="modernCard">
-              <span className="modernCardBadge">Architecture Redesign</span>
-              <h3 className="modernCardTitle">Dual-Plane Logging Engine</h3>
-              <p className="modernCardDesc">
-                Isolates high-frequency debug traces in 5GB local rolling files while keeping legally-binding clinical and financial audits in PostgreSQL with Cloudflare R2 WORM cold archival.
-              </p>
-            </Link>
+        {/* Feature Grid / Core Domains */}
+        <section className="domains-section">
+          <div className="domains-container">
+            <div className="domains-header">
+              <div className="domains-header-left">
+                <span className="section-badge">Core Domains</span>
+                <h2 className="section-title">Explore Production Architecture</h2>
+              </div>
+              <Link to="/docs/" className="view-all-link">
+                <span>Browse all 19 chapters</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
 
-            <Link to="/docs/logging-audit/task-roadmap-and-progress" className="modernCard">
-              <span className="modernCardBadge">Live Slices</span>
-              <h3 className="modernCardTitle">LOG-01 to LOG-10 Roadmap</h3>
-              <p className="modernCardDesc">
-                Live delivery status for hash-chain serialization (LOG-02), 401 HikariCP DoS defense (LOG-03), BRIN index tuning (LOG-04), and cold JSONL.gz archiver (LOG-05).
-              </p>
-            </Link>
+            <div className="cards-grid">
+              {/* Card 1: Logging & Audit */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box amber">
+                    <Terminal className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">LOG-01 — LOG-10</span>
+                </div>
+                <h3 className="card-title">Dual-Plane Logging & Audit Architecture</h3>
+                <p className="card-desc">
+                  Separates high-frequency operational logs (capped 5GB local rolling files) from legally-binding clinical audit logs (SHA-256 hash chained, PostgreSQL partitioned tables, and 7-year Cloudflare R2 cold WORM archival).
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Zap className="w-4 h-4 text-amber-400" />
+                    <span>PostgreSQL Advisory Locks for SHA-256 hash chaining</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <Cpu className="w-4 h-4 text-amber-400" />
+                    <span>HikariCP 401 connection exhaustion defense</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/logging-audit/dual-plane-architecture" className="card-btn-primary">
+                    <span>Architecture Guide</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/logging-audit/deep-technical-mechanisms" className="card-btn-secondary">
+                    Q&A Defense
+                  </Link>
+                </div>
+              </div>
 
-            <Link to="/docs/reference/technical-terms-dictionary" className="modernCard">
-              <span className="modernCardBadge">Glossary & Sinhala</span>
-              <h3 className="modernCardTitle">Technical Terms Dictionary</h3>
-              <p className="modernCardDesc">
-                Every difficult concept—Virtual Threads, HikariCP pool exhaustion, BRIN indexes, GIN deconstruction, and WORM storage—explained in crystal-clear Sinhala and English.
-              </p>
-            </Link>
+              {/* Card 2: Security & Rate Limiting */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box rose">
+                    <ShieldCheck className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">SEC-01 — SEC-04</span>
+                </div>
+                <h3 className="card-title">Distributed Rate Limiting & Auth</h3>
+                <p className="card-desc">
+                  4-tier distributed Bucket4j token bucket rate limiting protecting HikariCP pools from DoS, combined with seamless SSE JWT renew handshakes and RBAC Super Admin governance.
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Lock className="w-4 h-4 text-rose-400" />
+                    <span>Zero-touch SSE token rotation without disconnection</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <ShieldCheck className="w-4 h-4 text-rose-400" />
+                    <span>Clinical fail-open rule with atomic rate limit logging</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/security/rate-limiting" className="card-btn-primary">
+                    <span>Rate Limiting Specs</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/security/sse-token-refresh" className="card-btn-secondary">
+                    SSE Lifecycle
+                  </Link>
+                </div>
+              </div>
 
-            <Link to="/docs/security/rate-limiting" className="modernCard">
-              <span className="modernCardBadge">DDoS Protection</span>
-              <h3 className="modernCardTitle">Multi-Tier Rate Limiting</h3>
-              <p className="modernCardDesc">
-                Four-layer Bucket4j token bucket architecture backed by Redis CAS, with an automatic fail-open safety rule to ensure active clinical video consultations are never severed.
-              </p>
-            </Link>
+              {/* Card 3: Clinical & Real-Time */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box cyan">
+                    <Stethoscope className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">RTC-01 — RTC-03</span>
+                </div>
+                <h3 className="card-title">Clinical RTC & Emergency Queue</h3>
+                <p className="card-desc">
+                  LiveKit SFU WebRTC encrypted rooms with mid-call duration extensions (15m, 30m, 45m), paired with pessimistic SELECT FOR UPDATE emergency doctor dispatch.
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Zap className="w-4 h-4 text-cyan-400" />
+                    <span>Redis presence pool for active on-duty doctors</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <Database className="w-4 h-4 text-cyan-400" />
+                    <span>Drug catalog with Zero-PHI audit compliance</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/clinical/livekit-webrtc" className="card-btn-primary">
+                    <span>WebRTC Engine</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/clinical/on-demand-queue" className="card-btn-secondary">
+                    Emergency Dispatch
+                  </Link>
+                </div>
+              </div>
 
-            <Link to="/docs/clinical/livekit-webrtc" className="modernCard">
-              <span className="modernCardBadge">Telehealth Media</span>
-              <h3 className="modernCardTitle">LiveKit WebRTC Consultation</h3>
-              <p className="modernCardDesc">
-                Dynamic encrypted peer room provisioning, mid-call extension signaling (15m/30m/45m), and automated subscription credit settlement.
-              </p>
-            </Link>
+              {/* Card 4: Financial & Escrow */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box emerald">
+                    <DollarSign className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">PAY-01 — PAY-03</span>
+                </div>
+                <h3 className="card-title">Doctor Escrow & PayHere Webhooks</h3>
+                <p className="card-desc">
+                  Multi-account double-entry ledger with automated 15% platform commission deduction and idempotent PayHere webhook signatures using MD5 checksum validation.
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Lock className="w-4 h-4 text-emerald-400" />
+                    <span>Escrow funds locked until consultation sign-off</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <Layers className="w-4 h-4 text-emerald-400" />
+                    <span>Monthly subscription quota ledger with rollover guards</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/financial/doctor-wallet-escrow" className="card-btn-primary">
+                    <span>Escrow Ledger</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/financial/payhere-webhook-idempotency" className="card-btn-secondary">
+                    Webhook Verification
+                  </Link>
+                </div>
+              </div>
 
-            <Link to="/docs/financial/payhere-webhook-idempotency" className="modernCard">
-              <span className="modernCardBadge">Payments & Escrow</span>
-              <h3 className="modernCardTitle">PayHere Idempotency & Escrow</h3>
-              <p className="modernCardDesc">
-                MD5 signature verification, duplicate webhook deduplication, and doctor wallet escrow custody ensuring funds release only upon consultation completion.
+              {/* Card 5: Engineering Glossary & Dictionary */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box indigo">
+                    <BookOpen className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">GLOSSARY & TIMELINE</span>
+                </div>
+                <h3 className="card-title">Technical Terms Dictionary (සිංහල & English)</h3>
+                <p className="card-desc">
+                  24+ advanced architectural concepts (Pessimistic Locking, WORM, Hash Chain, BRIN Index, Outbox DLQ) explained using everyday real-world analogies and clear Sinhala breakdowns.
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Sparkles className="w-4 h-4 text-indigo-400" />
+                    <span>Zero confusing jargon — simplified for instant understanding</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <Clock className="w-4 h-4 text-indigo-400" />
+                    <span>Real daily engineering timeline with live git commits</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/reference/technical-terms-dictionary" className="card-btn-primary">
+                    <span>Terms Dictionary</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/engineering-timeline/daily-timeline" className="card-btn-secondary">
+                    Engineering Timeline
+                  </Link>
+                </div>
+              </div>
+
+              {/* Card 6: Database & Caching Optimization */}
+              <div className="feature-card">
+                <div className="card-top">
+                  <div className="card-icon-box violet">
+                    <Database className="w-6 h-6" />
+                  </div>
+                  <span className="card-status-badge">DB-01 — DB-04</span>
+                </div>
+                <h3 className="card-title">Database Indexing & Multi-Tier Caching</h3>
+                <p className="card-desc">
+                  Sub-10ms query optimization using PostgreSQL BRIN indexes for append-only logs, dropping heavy GIN indexes, Redis 7 token caching, and Transactional Outbox pattern with DLQ.
+                </p>
+                <div className="card-features-list">
+                  <div className="card-feature-item">
+                    <Zap className="w-4 h-4 text-violet-400" />
+                    <span>BRIN index: 95% smaller index footprint than B-Tree</span>
+                  </div>
+                  <div className="card-feature-item">
+                    <Cpu className="w-4 h-4 text-violet-400" />
+                    <span>60-second in-memory doctor dashboard cache TTL</span>
+                  </div>
+                </div>
+                <div className="card-actions">
+                  <Link to="/docs/reference/database-indexing-optimization" className="card-btn-primary">
+                    <span>Indexing Strategy</span>
+                    <ArrowRight className="w-4 h-4 ml-1" />
+                  </Link>
+                  <Link to="/docs/reference/caching-architecture" className="card-btn-secondary">
+                    Caching Architecture
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Quick Architecture Execution Flow Section */}
+        <section className="architecture-flow-section">
+          <div className="architecture-flow-container">
+            <div className="flow-card">
+              <div className="flow-card-badge">System Overview</div>
+              <h2 className="flow-title">Multi-Tier Distributed Healthcare Topology</h2>
+              <p className="flow-subtitle">
+                High-availability request routing, edge security, asynchronous event streaming, and 7-year immutable audit storage.
               </p>
-            </Link>
+
+              <div className="flow-steps-grid">
+                <div className="flow-step-box">
+                  <div className="flow-step-num">01</div>
+                  <h4>Edge & Client Layer</h4>
+                  <p>Flutter Mobile Apps & Next.js Web Portal route via Cloudflare with DDoS protection and token bucket rate limits.</p>
+                </div>
+                <div className="flow-step-box">
+                  <div className="flow-step-num">02</div>
+                  <h4>Virtual Thread Backend</h4>
+                  <p>Spring Boot 3.3 running on Java 21 Virtual Threads, handling 10,000+ concurrent telehealth calls with minimal thread overhead.</p>
+                </div>
+                <div className="flow-step-box">
+                  <div className="flow-step-num">03</div>
+                  <h4>Dual-Plane Storage</h4>
+                  <p>Local 5GB rolling logs for fast debug triage + PostgreSQL 16 partitioned tables with SHA-256 tamper-proof chaining.</p>
+                </div>
+                <div className="flow-step-box">
+                  <div className="flow-step-num">04</div>
+                  <h4>Cold Compliance Archive</h4>
+                  <p>Automated monthly partition detach and gzip streaming to Cloudflare R2 bucket with 7-year WORM immutability.</p>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
       </main>
