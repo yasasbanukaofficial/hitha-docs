@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import Layout from '@theme/Layout';
 import Link from '@docusaurus/Link';
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import CommandSearchModal from '../components/CommandSearchModal';
+import InteractiveTopologyFlow from '../components/InteractiveTopologyFlow';
 import { 
   Search, 
   Terminal, 
@@ -59,12 +61,6 @@ export default function Home(): React.JSX.Element {
           <div className="hero-glow-radial"></div>
 
           <div className="hero-container">
-            <div className="hero-eyebrow">
-              <span className="hero-eyebrow-dot"></span>
-              <span>Enterprise Telehealth Platform</span>
-              <span className="hero-eyebrow-pill">Docusaurus Reference</span>
-            </div>
-
             <h1 className="hero-heading">
               Build with HITHA <br />
               <span className="hero-gradient-text">Healthcare Distributed System</span>
@@ -169,6 +165,23 @@ export default function Home(): React.JSX.Element {
             ======================================================== */}
         <section className="sample-apps-section">
           <div className="section-container">
+            <div className="section-header-flex">
+              <div>
+                <span className="section-eyebrow-badge">Interactive System Blueprint</span>
+                <h2 className="section-main-heading">Live Interactive Topology (React Flow)</h2>
+              </div>
+              <Link to="/docs/clinical/livekit-webrtc" className="section-view-all">
+                <span>View Full Architecture Specs</span>
+                <ArrowRight className="w-4 h-4 ml-1" />
+              </Link>
+            </div>
+
+            <div style={{ margin: '24px 0 48px' }}>
+              <BrowserOnly fallback={<div style={{ height: '420px', background: '#f8fbff', borderRadius: '16px' }} />}>
+                {() => <InteractiveTopologyFlow />}
+              </BrowserOnly>
+            </div>
+
             <div className="section-header-flex">
               <div>
                 <span className="section-eyebrow-badge">Production Architecture</span>
