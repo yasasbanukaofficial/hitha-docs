@@ -5,11 +5,11 @@ import { LOGO_REGISTRY } from './logos';
 export function LogoNode({ data, selected }: { data: any; selected?: boolean }) {
   const logo = LOGO_REGISTRY[data.logo] || {
     name: data.title || 'Service',
-    src: '/img/logos/hitha.svg',
-    color: '#2160fd',
+    src: '/img/logos/hitha.png',
+    color: '#00a8b5',
   };
 
-  const badgeColor = data.badgeColor || '#2160fd';
+  const badgeColor = data.badgeColor || '#00a8b5';
 
   return (
     <div
@@ -25,10 +25,43 @@ export function LogoNode({ data, selected }: { data: any; selected?: boolean }) 
       }}
       aria-label={data.title || logo.name}
     >
+      {/* Detached Badge on top of the whole logo, cleanly separated with no overlap */}
+      {data.badge && (
+        <div
+          style={{
+            position: 'absolute',
+            top: '-24px',
+            left: '50%',
+            transform: 'translateX(-50%)',
+            zIndex: 10,
+            pointerEvents: 'none',
+          }}
+        >
+          <span
+            style={{
+              display: 'inline-block',
+              background: badgeColor,
+              color: '#ffffff',
+              fontSize: '10px',
+              fontWeight: 800,
+              padding: '2.5px 8px',
+              borderRadius: '9999px',
+              boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
+              whiteSpace: 'nowrap',
+              letterSpacing: '0.02em',
+              textTransform: 'uppercase',
+              lineHeight: 1.2,
+            }}
+          >
+            {data.badge}
+          </span>
+        </div>
+      )}
+
       <Handle type="target" position={Position.Left} style={{ background: '#64748b', width: 8, height: 8 }} />
       <Handle type="target" position={Position.Top} id="top" style={{ background: '#64748b', width: 8, height: 8 }} />
 
-      {/* 3D Glossy Tile */}
+      {/* 3D Glossy Tile - completely unblocked, showcasing only the real logo */}
       <div
         className="logo-tile-box"
         style={{
@@ -47,28 +80,6 @@ export function LogoNode({ data, selected }: { data: any; selected?: boolean }) 
           transition: 'all 0.2s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        {/* Optional Badge */}
-        {data.badge && (
-          <span
-            style={{
-              position: 'absolute',
-              top: '-8px',
-              right: '-8px',
-              background: badgeColor,
-              color: '#ffffff',
-              fontSize: '10.5px',
-              fontWeight: 800,
-              padding: '2px 7px',
-              borderRadius: '9999px',
-              boxShadow: '0 2px 6px rgba(0,0,0,0.15)',
-              border: '2px solid #ffffff',
-              zIndex: 10,
-            }}
-          >
-            {data.badge}
-          </span>
-        )}
-
         <img
           src={logo.src}
           alt={logo.name}

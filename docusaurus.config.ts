@@ -61,6 +61,12 @@ const config: Config = {
     },
     navbar: {
       title: 'HITHA',
+      logo: {
+        alt: 'HITHA Telehealth Platform',
+        src: 'img/hitha-logo.png',
+        width: 30,
+        height: 30,
+      },
       items: [
         {
           to: '/docs',
@@ -71,6 +77,11 @@ const config: Config = {
           to: '/api',
           position: 'left',
           label: 'REST API',
+        },
+        {
+          to: '/docs/reference/technical-terms-dictionary',
+          position: 'left',
+          label: 'Dictionary',
         },
         {
           href: 'https://github.com/yasasbanukaofficial/hitha-docs',

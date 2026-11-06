@@ -302,7 +302,7 @@ export default function FlowDiagram({
               }}
             >
               {isPlaying ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5" />}
-              <span>{isPlaying ? 'Pause' : '▶ Play flow'}</span>
+              <span>{isPlaying ? 'Pause' : 'Play flow'}</span>
             </button>
           )}
 
@@ -417,6 +417,7 @@ export default function FlowDiagram({
             zoomActivationKeyPressed="Control"
             panOnDrag={true}
             attributionPosition="bottom-right"
+            proOptions={{ hideAttribution: true }}
           >
             <Background variant={BackgroundVariant.Dots} gap={18} size={1.2} color="#c7ddfc" />
           </ReactFlow>

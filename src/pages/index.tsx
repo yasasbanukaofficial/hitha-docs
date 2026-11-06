@@ -168,7 +168,7 @@ export default function Home(): React.JSX.Element {
             <div className="section-header-flex">
               <div>
                 <span className="section-eyebrow-badge">Interactive System Blueprint</span>
-                <h2 className="section-main-heading">Live Interactive Topology (React Flow)</h2>
+                <h2 className="section-main-heading">Live Interactive System Topology</h2>
               </div>
               <Link to="/docs/clinical/livekit-webrtc" className="section-view-all">
                 <span>View Full Architecture Specs</span>

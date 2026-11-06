@@ -26,6 +26,7 @@ const CATEGORY_ICONS: Record<string, React.ReactNode> = {
   Clinical: <Stethoscope className="w-4 h-4 text-cyan-500" />,
   Financial: <DollarSign className="w-4 h-4 text-emerald-500" />,
   Reference: <FileText className="w-4 h-4 text-indigo-500" />,
+  Dictionary: <FileText className="w-4 h-4 text-teal-500" />,
   'Engineering Timeline': <Clock className="w-4 h-4 text-violet-500" />,
 };
 
@@ -36,6 +37,7 @@ interface SearchModalProps {
 
 const FILTER_CATEGORIES = [
   { id: 'ALL', label: 'All' },
+  { id: 'Dictionary', label: '📖 Dictionary (#)' },
   { id: 'Clinical', label: 'Clinical' },
   { id: 'Security', label: 'Security' },
   { id: 'Logging Audit', label: 'Logging & Audit' },
@@ -66,15 +68,41 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
 
   // Filter items based on query & category
   const filteredItems: DocItem[] = useMemo(() => {
-    const q = query.trim().toLowerCase();
+    const rawQ = query.trim();
+    const isHashSearch = rawQ.startsWith('#');
+    const q = (isHashSearch ? rawQ.slice(1).trim() : rawQ).toLowerCase();
+
     return (catalogData as DocItem[]).filter((item) => {
-      if (selectedCategory !== 'ALL' && item.category !== selectedCategory) {
+      // If user typed '#' prefix, strictly match dictionary or reference terms
+      if (isHashSearch) {
+        const isDict =
+          item.category === 'Dictionary' ||
+          item.category === 'Reference' ||
+          item.route.includes('dictionary') ||
+          item.id.includes('dictionary');
+        if (!isDict) return false;
+        if (!q) return true;
+        const titleMatch = item.title.toLowerCase().includes(q);
+        const previewMatch = item.preview.toLowerCase().includes(q);
+        const headingMatch = item.headings?.some((h) => h.title.toLowerCase().includes(q));
+        return titleMatch || previewMatch || headingMatch;
+      }
+
+      if (selectedCategory === 'Dictionary') {
+        const isDict =
+          item.category === 'Dictionary' ||
+          item.category === 'Reference' ||
+          item.route.includes('dictionary') ||
+          item.id.includes('dictionary');
+        if (!isDict) return false;
+      } else if (selectedCategory !== 'ALL' && item.category !== selectedCategory) {
         return false;
       }
+
       if (!q) return true;
       const titleMatch = item.title.toLowerCase().includes(q);
       const previewMatch = item.preview.toLowerCase().includes(q);
-      const headingMatch = item.headings.some(h => h.title.toLowerCase().includes(q));
+      const headingMatch = item.headings?.some((h) => h.title.toLowerCase().includes(q));
       const categoryMatch = item.category.toLowerCase().includes(q);
       return titleMatch || previewMatch || headingMatch || categoryMatch;
     });
@@ -143,7 +171,7 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
             ref={inputRef}
             type="text"
             className="search-modal-input"
-            placeholder="Search architecture, diagrams, scenarios, or concepts..."
+            placeholder="Search architecture, diagrams, scenarios, or type '#' for Dictionary..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             aria-label="Search documentation"

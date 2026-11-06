@@ -144,12 +144,28 @@ export const dualPlaneHeroNodes: Node[] = [
     data: {
       logo: 'logback',
       title: 'Logback Async',
-      caption: 'Plane A: Operational Logs',
-      badge: '5 GB Cap',
+      caption: '8,192 Ring Buffer',
+      badge: 'Zero Disk Wait',
       badgeColor: '#2563eb',
       details: {
         className: 'logback-spring.xml',
         description: 'Non-blocking RingBuffer appender writing hourly 100MB chunked files.',
+      },
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'localDisk',
+    type: 'logoNode',
+    data: {
+      logo: 'disk',
+      title: 'Local Rolling Disk',
+      caption: 'Plane A: 5GB capped storage',
+      badge: 'Auto-Eviction',
+      badgeColor: '#16a34a',
+      details: {
+        className: 'logback-spring.xml',
+        description: 'Hourly 100MB compressed GZIP files with 14-day automated FIFO eviction.',
       },
     },
     position: { x: 0, y: 0 },
@@ -191,16 +207,18 @@ export const dualPlaneHeroNodes: Node[] = [
 export const dualPlaneHeroEdges: Edge[] = [
   { id: 'e1', source: 'http', target: 'filter', animated: true },
   { id: 'e2', source: 'filter', target: 'planeA', label: 'debug & operational logs', style: { stroke: '#2563eb', strokeWidth: 2 } },
-  { id: 'e3', source: 'filter', target: 'planeB', label: 'legal compliance audits', style: { stroke: '#0284c7', strokeWidth: 2 } },
-  { id: 'e4', source: 'planeB', target: 'r2', label: '90+ days archival', style: { stroke: '#f97316', strokeWidth: 2, strokeDasharray: '4,4' } },
+  { id: 'e3', source: 'planeA', target: 'localDisk', label: 'hourly gzip rolling', style: { stroke: '#16a34a', strokeWidth: 2 } },
+  { id: 'e4', source: 'filter', target: 'planeB', label: 'legal compliance audits', style: { stroke: '#0284c7', strokeWidth: 2 } },
+  { id: 'e5', source: 'planeB', target: 'r2', label: '90+ days cold stream', style: { stroke: '#f97316', strokeWidth: 2, strokeDasharray: '4,4' } },
 ];
 
 export const dualPlaneHeroSteps = [
   { step: 1, nodeId: 'http', description: 'Patient or doctor request arrives at the API perimeter.' },
   { step: 2, nodeId: 'filter', description: 'Request tagging adds user ID, role, IP address, and region tags.' },
-  { step: 3, nodeId: 'planeA', description: 'High-frequency operational logs stream to local disk (Plane A, 5GB cap).' },
-  { step: 4, nodeId: 'planeB', description: 'Immutable clinical compliance records commit to PostgreSQL (Plane B).' },
-  { step: 5, nodeId: 'r2', description: 'Records older than 90 days migrate to Cloudflare R2 7-year WORM cold storage.' },
+  { step: 3, nodeId: 'planeA', description: 'Operational traces are queued in Logback AsyncAppender 8,192 ring buffer.' },
+  { step: 4, nodeId: 'localDisk', description: 'Plane A logs write to local disk with 100MB hourly GZIP rolling and 5GB cap.' },
+  { step: 5, nodeId: 'planeB', description: 'Immutable clinical compliance records commit to PostgreSQL (Plane B).' },
+  { step: 6, nodeId: 'r2', description: 'Records older than 90 days migrate to Cloudflare R2 7-year WORM cold storage.' },
 ];
 
 export const heroNodes = dualPlaneHeroNodes;

@@ -105,4 +105,9 @@ export const LOGO_REGISTRY: Record<string, LogoItem> = {
     src: '/img/logos/lock.svg',
     color: '#0F172A',
   },
+  disk: {
+    name: 'Local Disk',
+    src: '/img/logos/disk.svg',
+    color: '#16A34A',
+  },
 };

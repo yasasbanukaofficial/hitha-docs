@@ -257,17 +257,17 @@
   },
   {
     "id": "reference/technical-terms-dictionary",
-    "title": "Technical Terms & Architecture Glossary",
+    "title": "Technical Terms & Architecture Glossary (ඉංග්‍රීසි සහ සරල සිංහල තේරුම්)",
     "category": "Reference",
     "route": "/docs/reference/technical-terms-dictionary",
     "headings": [
       {
-        "title": "📚 Complete Dictionary of Architecture Terms",
+        "title": "📚 Complete Dictionary of Architecture Terms (English & Conversational Sinhala)",
         "slug": "complete-dictionary-of-architecture-terms",
         "url": "/docs/reference/technical-terms-dictionary#complete-dictionary-of-architecture-terms"
       }
     ],
-    "preview": "id: technical terms dictionary title: Technical Terms & Architecture Glossary sidebar label: Architecture Terms Dictionary slug: /reference/technical terms dictionary Technical Terms & Architecture Glossary This glossary defines core distributed systems, database, and telemetry terminology used across the HITHA engineering platform. Each term includes an everyday engineering analogy, its concrete operational definition, and its direct codebase implementation. 📚 Complete Dictionary of Architecture Terms | Term & Concept | Plain English Analogy | Technical Definition | HITHA Codebase Location | |: |: |: |: | | Dual Plane Logging | Two Road Traffic Separation : Sending high frequency debug traces to local files, while keeping only legally binding audit records in the database. | Architectural separation of high volume operational runtime traces Plane A, rolling local files capped at 5GB from immutable, legally binding clinical audit logs Plane B, PostgreSQL partitioned table + Cloudflare R2 . | logback spring.xml + AuditLogServiceImpl.java | | Log Rolling Policy | File Size & Time Auto"
+    "preview": "technical terms dictionary glossary Dual-Plane Logging Log Rolling Policy Disk Cap Auto-Eviction MDC Context Correlation ID Virtual Threads ReentrantLock HikariCP Pool Connection Exhaustion Sliding Window Limiter GIN Index BRIN Index Composite B-Tree Index TTL Cache JSON Lines JSONL GZIP Compression SHA-256 Manifest WORM Storage Hive Partitioning Pessimistic Locking Redis Presence Pool Idempotency Escrow Vault Server-Sent Events SSE Transactional Outbox Zero-PHI Sanitization SFU LiveKit WebRTC සරල සිංහල තේරුම් ලොග් වර්ග බෙදීම දින 14ක් පැරණි logs auto delete සැහැල්ලු ත්‍රෙඩ් සීමිත සම්බන්ධතා 8 database හිරවීම 99%ක් කුඩා index එක RAM එකේ තබාගැනීම අවුරුදු 7ක් ආරක්ෂිත cloud ගබඩාව පේළිය අගුළු ලා බලා සිටීම Doctor online ද නැද්ද එකම payment notification එක doctor wallet escrow"
   },
   {
     "id": "reference/transactional-outbox-pattern",
