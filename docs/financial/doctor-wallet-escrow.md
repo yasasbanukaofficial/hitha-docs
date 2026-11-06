@@ -12,6 +12,14 @@ import TabItem from '@theme/TabItem';
 
 To protect patient funds while ensuring medical professionals receive timely payouts, HITHA enforces an **Escrow Custody Model** backed by double-entry accounting.
 
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/escrow-ledger-split.svg" alt="Doctor Escrow Custody & Double Entry Ledger" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 4.0:</b> Double-Entry Escrow Custody &amp; Platform Commission Deductions</span>
+    <span className="arch-diagram-badge">PAY-02 &amp; LEDGER</span>
+  </div>
+</div>
+
 ---
 
 ## 🏦 Escrow Settlement Mechanism

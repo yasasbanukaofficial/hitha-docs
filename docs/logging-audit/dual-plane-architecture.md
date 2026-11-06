@@ -17,6 +17,14 @@ Telehealth systems generate massive amounts of telemetry: debug traces, query ex
 
 To permanently solve this, HITHA enforces the **Dual-Plane Logging Strategy**.
 
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/dual-plane-flow.svg" alt="HITHA Dual-Plane Logging Pipeline" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 1.0:</b> Dual-Plane Logging Topology &amp; Storage Separation</span>
+    <span className="arch-diagram-badge">LOG-01 &amp; LOG-06</span>
+  </div>
+</div>
+
 ---
 
 ## 🔍 How Dual-Plane Logging Works

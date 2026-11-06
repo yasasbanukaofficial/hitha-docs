@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d" />
+      <stop offset="100%" stop-color="#060913" />
+    </linearGradient>
+    <linearGradient id="planeAGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#d97706" stop-opacity="0.05" />
+    </linearGradient>
+    <linearGradient id="planeBGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#2563eb" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#10b981" stop-opacity="0.05" />
+    </linearGradient>
+    <filter id="shadow" x="-5%" y="-5%" width="110%" height="110%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#000" flood-opacity="0.5"/>
+    </filter>
+  </defs>
+
+  <!-- Background -->
+  <rect width="800" height="360" rx="16" fill="url(#bgGrad)" stroke="#1e293b" stroke-width="1.5" />
+
+  <!-- App Header / Origin -->
+  <rect x="40" y="30" width="180" height="80" rx="12" fill="#0f172a" stroke="#334155" stroke-width="1.5" filter="url(#shadow)"/>
+  <text x="55" y="60" fill="#94a3b8" font-family="'JetBrains Mono', monospace" font-size="11" font-weight="600">SPRING BOOT 3.3</text>
+  <text x="55" y="82" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">AuditLogAspect</text>
+  <circle cx="195" cy="55" r="4" fill="#10b981" />
+
+  <!-- Decision Fork -->
+  <path d="M 220 70 L 290 70" stroke="#475569" stroke-width="2" stroke-dasharray="4,4" />
+  <circle cx="290" cy="70" r="16" fill="#1e293b" stroke="#64748b" stroke-width="1.5" />
+  <text x="284" y="75" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="800">⇌</text>
+
+  <!-- Plane A: Operational Branch -->
+  <path d="M 290 70 L 290 140 L 340 140" stroke="#f59e0b" stroke-width="2" fill="none" />
+  <rect x="340" y="105" width="420" height="90" rx="12" fill="url(#planeAGrad)" stroke="#f59e0b" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="355" y="120" width="70" height="20" rx="4" fill="#f59e0b" fill-opacity="0.2" />
+  <text x="362" y="134" fill="#fbbf24" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">PLANE A</text>
+  <text x="435" y="135" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">Local Rolling Files (Capped 5GB)</text>
+  <text x="355" y="162" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">High-frequency debug traces, queries &amp; telemetry</text>
+  <text x="355" y="180" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="11">Logback AsyncAppender • Zero DB connections held</text>
+
+  <!-- Plane B: Compliance Branch -->
+  <path d="M 290 70 L 290 260 L 340 260" stroke="#2563eb" stroke-width="2" fill="none" />
+  <rect x="340" y="215" width="420" height="115" rx="12" fill="url(#planeBGrad)" stroke="#2563eb" stroke-width="1.5" filter="url(#shadow)"/>
+  <rect x="355" y="230" width="70" height="20" rx="4" fill="#2563eb" fill-opacity="0.2" />
+  <text x="362" y="244" fill="#60a5fa" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">PLANE B</text>
+  <text x="435" y="245" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="700">PostgreSQL Hot Table + Cloudflare R2 WORM</text>
+  <text x="355" y="272" fill="#94a3b8" font-family="'Plus Jakarta Sans', sans-serif" font-size="12">Cryptographic SHA-256 hash chaining with pg_advisory_xact_lock</text>
+  <text x="355" y="292" fill="#64748b" font-family="'JetBrains Mono', monospace" font-size="11">Monthly partitioned table detach → 7-year cold immutable archive</text>
+  <circle cx="735" cy="272" r="10" fill="#10b981" fill-opacity="0.2" stroke="#10b981" stroke-width="1.5" />
+  <text x="731" y="276" fill="#10b981" font-size="12">✓</text>
+</svg>

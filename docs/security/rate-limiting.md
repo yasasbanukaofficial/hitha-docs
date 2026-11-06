@@ -14,6 +14,14 @@ HITHA operates in a multi-tenant healthcare environment where automated bots, ma
 
 To guarantee zero clinical impact, HITHA implements a 4-tier distributed rate-limiting architecture powered by **Bucket4j**, **Redis Token Buckets**, and **Spring AOP**.
 
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/rate-limiting-tiers.svg" alt="HITHA Multi-Tier Rate Limiting Architecture" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 2.0:</b> Pre-Auth Filter-Level Bucket4j Rate Limiting &amp; Fail-Open Circuit</span>
+    <span className="arch-diagram-badge">SEC-01 &amp; SEC-03</span>
+  </div>
+</div>
+
 ---
 
 ## 🛡️ Multi-Tier Architecture Overview

@@ -93,9 +93,9 @@ const config: Config = {
       copyright: `Copyright © ${new Date().getFullYear()} HITHA Healthcare Platform. Built with Docusaurus.`,
     },
     prism: {
-      theme: prismThemes.github,
-      darkTheme: prismThemes.dracula,
-      additionalLanguages: ['java', 'bash', 'yaml', 'json', 'sql'],
+      theme: prismThemes.vsLight,
+      darkTheme: prismThemes.oceanicNext,
+      additionalLanguages: ['java', 'bash', 'yaml', 'json', 'sql', 'typescript', 'protobuf'],
     },
   } satisfies Preset.ThemeConfig,
 };

@@ -12,6 +12,14 @@ import TabItem from '@theme/TabItem';
 
 HITHA uses **LiveKit SFU (Selective Forwarding Unit)** for ultra-low latency, HIPAA-compliant encrypted video and audio consultation sessions between patients and doctors.
 
+<div className="arch-diagram-wrapper">
+  <img src="/img/diagrams/livekit-webrtc.svg" alt="LiveKit WebRTC SFU Architecture" width="100%" />
+  <div className="arch-diagram-caption">
+    <span><b>Figure 3.0:</b> LiveKit SFU Video Room Lifecycle &amp; Mid-Call Quota Settlement</span>
+    <span className="arch-diagram-badge">RTC-01 &amp; CALL-EXT</span>
+  </div>
+</div>
+
 ---
 
 ## 🎥 Video Consultation Lifecycle
