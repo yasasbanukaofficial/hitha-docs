@@ -5,9 +5,25 @@ sidebar_label: Caching Architecture
 slug: /reference/caching-architecture
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { cachingNodes, cachingEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # Multi-Tier Distributed Caching Strategy (Redis & In-Memory TTL)
 
-To protect PostgreSQL 16 from high-frequency queries and maintain sub-50ms API responses, HITHA implements a multi-tier caching hierarchy:
+To protect PostgreSQL 16 from high-frequency queries and maintain sub-50ms API responses, HITHA implements a multi-tier caching hierarchy combining L1 JVM Caffeine memory with L2 Redis 7.2 distributed clusters.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={cachingNodes}
+      edges={cachingEdges}
+      height={380}
+      caption="Multi-Tier Caching Flow: L1 Caffeine micro-cache handles high-frequency reads in RAM; L2 Redis Cluster with Redisson mutex locking shields the primary PostgreSQL database."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

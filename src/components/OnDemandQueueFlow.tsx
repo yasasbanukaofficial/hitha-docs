@@ -7,6 +7,8 @@ import {
   useNodesState,
   useEdgesState,
   MarkerType,
+  Handle,
+  Position,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -14,6 +16,7 @@ import '@xyflow/react/dist/style.css';
 function PatientNode() {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '1.5px solid #0f172a',
       borderRadius: '14px',
@@ -22,6 +25,8 @@ function PatientNode() {
       boxShadow: '0 8px 20px -4px rgba(15, 23, 42, 0.08)',
       textAlign: 'center'
     }}>
+      <Handle type="source" position={Position.Right} style={{ background: '#2160fd', width: 8, height: 8 }} />
+
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
         {/* Mobile Phone Device Model */}
         <svg width="34" height="34" viewBox="0 0 100 100" fill="none">
@@ -51,6 +56,7 @@ function PatientNode() {
 function DispatchEngineNode() {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '2px solid #2160fd',
       borderRadius: '16px',
@@ -59,6 +65,9 @@ function DispatchEngineNode() {
       boxShadow: '0 12px 30px -6px rgba(33, 96, 253, 0.12)',
       textAlign: 'center'
     }}>
+      <Handle type="target" position={Position.Left} style={{ background: '#2160fd', width: 8, height: 8 }} />
+      <Handle type="source" position={Position.Right} style={{ background: '#16a34a', width: 8, height: 8 }} />
+
       <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginBottom: '8px' }}>
         {/* Redis Cube */}
         <svg width="28" height="28" viewBox="0 0 100 100" fill="none">
@@ -106,6 +115,7 @@ function DispatchEngineNode() {
 function DutyDoctorNode() {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '1.5px solid #16a34a',
       borderRadius: '14px',
@@ -114,6 +124,8 @@ function DutyDoctorNode() {
       boxShadow: '0 8px 20px -4px rgba(22, 163, 74, 0.1)',
       textAlign: 'center'
     }}>
+      <Handle type="target" position={Position.Left} style={{ background: '#16a34a', width: 8, height: 8 }} />
+
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
         {/* Doctor Stethoscope / Avatar SVG */}
         <svg width="36" height="36" viewBox="0 0 100 100" fill="none">

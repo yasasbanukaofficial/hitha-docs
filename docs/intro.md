@@ -5,10 +5,26 @@ sidebar_label: Overview & Core Principles
 slug: /
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { heroNodes, heroEdges, heroSteps } from '@site/src/components/FlowDiagram/diagramData';
 
 # HITHA System Architecture & Technical Documentation
 
-Welcome to the **HITHA Healthcare Engineering & Architecture Portal**. This documentation serves as the comprehensive technical reference for the platform's distributed systems, healthcare compliance pipelines, tele-mental-health infrastructure, and recent architectural refactorings.
+Welcome to the **HITHA Healthcare Engineering & Architecture Portal**. This documentation serves as the comprehensive technical reference for the platform's distributed systems, healthcare compliance pipelines, tele-mental-health infrastructure, and architectural blueprints.
+
+<BrowserOnly fallback={<div style={{ height: '420px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={heroNodes}
+      edges={heroEdges}
+      steps={heroSteps}
+      height={420}
+      caption="HITHA Distributed System Topology: Client apps connect through Spring Boot 3.3 virtual threads, orchestrated with Redis 7.2 presence, PostgreSQL 16 ACID storage, LiveKit SFU, and Cloudflare R2 7-year WORM archival."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 
@@ -23,24 +39,6 @@ Welcome to the **HITHA Healthcare Engineering & Architecture Portal**. This docu
 ---
 
 ## 🏛️ Core Architectural Pillars
-
-```mermaid
-graph TD
-    Client["👤 Web Browser / Flutter Mobile App"]
-    Edge["🛡️ Cloudflare Edge + Rate Limiter"]
-    Backend["☕ Spring Boot 3.3 (Java 21 Virtual Threads)"]
-    DB[("🐘 PostgreSQL 16 (Partitions + BRIN)")]
-    Redis[("⚡ Redis 7 (Tokens + Cache)")]
-    R2[("📦 Cloudflare R2 (7-Year Cold Archive)")]
-    LiveKit["🎥 LiveKit SFU (WebRTC Audio/Video)"]
-
-    Client --> Edge
-    Edge --> Backend
-    Backend --> DB
-    Backend --> Redis
-    Backend --> LiveKit
-    DB -.->|Monthly Detach & Purge| R2
-```
 
 1. **Dual-Plane Logging Model**: High-frequency operational logs are stored in 5GB capped local rolling files, while legally-binding compliance audit logs are stored in PostgreSQL with SHA-256 hash chaining and 7-year Cloudflare R2 archival.
 2. **Multi-Tier Distributed Rate Limiting**: Tiered Bucket4j token buckets enforced at the filter level to protect PostgreSQL and HikariCP connection pools from DoS attacks.

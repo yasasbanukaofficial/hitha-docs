@@ -302,73 +302,60 @@ code {
 
 .hero-section {
   position: relative;
-  padding: 90px 24px 70px;
+  padding: 80px 24px 60px;
   text-align: center;
-  background: radial-gradient(circle at 50% 0%, rgba(0, 168, 181, 0.18) 0%, transparent 65%);
+  background-color: #f8fbff;
+  background-image: radial-gradient(#d5e5fc 1.25px, transparent 1.25px);
+  background-size: 20px 20px;
+}
+
+[data-theme='dark'] .hero-section {
+  background-color: #071520;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.25px, transparent 1.25px);
+  background-size: 20px 20px;
 }
 
 .hero-container {
-  max-width: 900px;
+  max-width: 1180px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
 }
 
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  background: rgba(0, 168, 181, 0.1);
-  border: 1px solid rgba(0, 168, 181, 0.3);
-  border-radius: 9999px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #54cbd4;
-  margin-bottom: 24px;
-}
-
-.hero-eyebrow-dot {
-  width: 6px;
-  height: 6px;
-  background: var(--hitha-mint);
-  border-radius: 50%;
-  box-shadow: 0 0 10px var(--hitha-mint);
-}
-
-.hero-eyebrow-pill {
-  background: rgba(0, 168, 181, 0.25);
-  padding: 2px 8px;
-  border-radius: 9999px;
-  font-size: 10.5px;
-}
-
 .hero-heading {
-  font-size: clamp(2.4rem, 5vw, 3.8rem);
+  font-size: clamp(2.4rem, 5vw, 3.6rem);
   font-weight: 800;
   letter-spacing: -0.03em;
   line-height: 1.15;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
+  color: #0f172a;
+}
+
+[data-theme='dark'] .hero-heading {
   color: #ffffff;
 }
 
 .hero-gradient-text {
-  background: linear-gradient(135deg, #a8d672 15%, #00a8b5 60%, #0d3b66 100%);
+  background: linear-gradient(135deg, #16a34a 0%, #0284c7 50%, #2160fd 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
 
 .hero-description {
-  font-size: 1.12rem;
-  color: #7c97af;
-  max-width: 680px;
-  margin: 0 auto 36px;
+  font-size: 1.08rem;
+  color: #475569;
+  max-width: 720px;
+  margin: 0 auto 32px;
   line-height: 1.6;
+}
+
+[data-theme='dark'] .hero-description {
+  color: #94a3b8;
 }
 
 .hero-search-wrapper {
   max-width: 660px;
-  margin: 0 auto 28px;
+  margin: 0 auto 36px;
   cursor: pointer;
 }
 
@@ -376,18 +363,28 @@ code {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: rgba(12, 32, 45, 0.85);
-  border: 1px solid rgba(211, 234, 228, 0.15);
-  border-radius: 12px;
-  padding: 14px 20px;
-  box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(0, 168, 181, 0.12);
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  background: #ffffff;
+  border: 1px solid #cbd5e1;
+  border-radius: 9999px;
+  padding: 12px 24px;
+  box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.07);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .hero-search-bar:hover {
-  border-color: var(--hitha-mint);
+  border-color: #2160fd;
   transform: translateY(-2px);
-  box-shadow: 0 16px 36px -10px rgba(0, 168, 181, 0.25), 0 0 0 1px var(--hitha-mint);
+  box-shadow: 0 8px 24px -2px rgba(33, 96, 253, 0.16);
+}
+
+[data-theme='dark'] .hero-search-bar {
+  background: #0d1520;
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 20px -2px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme='dark'] .hero-search-bar:hover {
+  border-color: #2160fd;
 }
 
 .hero-search-left {
@@ -397,14 +394,19 @@ code {
 }
 
 .hero-search-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--hitha-mint);
+  width: 18px;
+  height: 18px;
+  color: #2160fd;
 }
 
 .hero-search-placeholder {
   font-size: 0.95rem;
-  color: #7c97af;
+  color: #64748b;
+  font-weight: 500;
+}
+
+[data-theme='dark'] .hero-search-placeholder {
+  color: #94a3b8;
 }
 
 .hero-search-right {
@@ -414,18 +416,29 @@ code {
 }
 
 .hero-search-kbd {
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.16);
+  background: #f1f5f9;
+  border: 1px solid #cbd5e1;
   border-radius: 6px;
   padding: 3px 8px;
   font-size: 11px;
   font-family: var(--ifm-font-family-monospace);
+  color: #475569;
+  font-weight: 600;
+}
+
+[data-theme='dark'] .hero-search-kbd {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.16);
   color: #f1f5f9;
 }
 
 .hero-search-hint {
   font-size: 12px;
-  color: #7c97af;
+  color: #64748b;
+}
+
+[data-theme='dark'] .hero-search-hint {
+  color: #94a3b8;
 }
 
 .hero-tags {
@@ -1830,19 +1843,20 @@ code {
   background-size: 20px 20px;
 }
 
-[data-theme='dark'] .hero-section {
-  background-color: #071520;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.25px, transparent 1.25px);
-  background-size: 20px 20px;
-}
-
 .hero-feature-cards-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 24px;
-  max-width: 1100px;
-  margin: 40px auto 0;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+  max-width: 1140px;
+  margin: 36px auto 0;
   text-align: left;
+}
+
+@media (max-width: 992px) {
+  .hero-feature-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
 }
 
 .hero-card-link {
@@ -1932,4 +1946,206 @@ code {
   border-radius: 4px;
   padding: 1px 4px;
   font-size: 11px;
+}
+
+/* ========================================================
+   VISUAL LEDGER STAT CHIPS & BADGES
+   ======================================================== */
+.timeline-date-chip {
+  display: inline-block;
+  background: #eff6ff;
+  color: #2160fd;
+  border: 1px solid #bfdbfe;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-left: 10px;
+  vertical-align: middle;
+}
+
+[data-theme='dark'] .timeline-date-chip {
+  background: rgba(33, 96, 253, 0.15);
+  border-color: rgba(33, 96, 253, 0.35);
+  color: #60a5fa;
+}
+
+.commit-header-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.commit-badge-id {
+  background: #2160fd;
+  color: #ffffff;
+  font-size: 11px;
+  font-weight: 800;
+  padding: 3px 8px;
+  border-radius: 6px;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+.commit-badge-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+}
+
+[data-theme='dark'] .commit-badge-title {
+  color: #ffffff;
+}
+
+.commit-hash {
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  color: #475569;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 6px;
+}
+
+[data-theme='dark'] .commit-hash {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #cbd5e1;
+}
+
+.stat-chips-row {
+  display: flex;
+  gap: 14px;
+  margin: 16px 0 28px;
+  flex-wrap: wrap;
+}
+
+.stat-chip {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 10px 16px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+}
+
+[data-theme='dark'] .stat-chip {
+  background: #0d1520;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.stat-number {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #2160fd;
+  font-family: var(--ifm-font-family-monospace);
+}
+
+[data-theme='dark'] .stat-number {
+  color: #60a5fa;
+}
+
+.stat-label {
+  font-size: 11px;
+  color: #64748b;
+  margin-top: 2px;
+}
+
+/* ========================================================
+   DATE CHIPS, COMMIT CHIPS & STAT CHIPS (Visual Ledger)
+   ======================================================== */
+.date-chip {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 700;
+  background: #eff6ff;
+  color: #2160fd;
+  border: 1px solid #bfdbfe;
+  padding: 3px 10px;
+  border-radius: 9999px;
+  vertical-align: middle;
+  margin-left: 8px;
+}
+
+[data-theme='dark'] .date-chip {
+  background: rgba(33, 96, 253, 0.15);
+  border-color: rgba(33, 96, 253, 0.4);
+  color: #60a5fa;
+}
+
+.commit-chip {
+  display: inline-block;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 12px;
+  font-weight: 700;
+  background: #f1f5f9;
+  color: #0f172a;
+  border: 1px solid #cbd5e1;
+  padding: 2px 8px;
+  border-radius: 6px;
+  vertical-align: middle;
+  margin-left: 6px;
+}
+
+[data-theme='dark'] .commit-chip {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #cbd5e1;
+}
+
+.stat-chips-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin: 16px 0 28px;
+}
+
+.stat-chip {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+  padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.03);
+  min-width: 90px;
+}
+
+[data-theme='dark'] .stat-chip {
+  background: #0d1520;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+.stat-num {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: #0f172a;
+  font-family: var(--ifm-font-family-monospace);
+  line-height: 1.2;
+}
+
+[data-theme='dark'] .stat-num {
+  color: #ffffff;
+}
+
+.stat-lbl {
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #64748b;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  margin-top: 2px;
+}
+
+[data-theme='dark'] .stat-lbl {
+  color: #94a3b8;
+}
+
+/* 3D Logo Node Hover Effects */
+.flow-logo-node:hover .logo-tile-box {
+  transform: translateY(-4px) scale(1.03);
+  box-shadow: 0 16px 36px -6px rgba(15, 23, 42, 0.18), inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }

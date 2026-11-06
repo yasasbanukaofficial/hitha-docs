@@ -5,9 +5,25 @@ sidebar_label: PayHere Webhook Idempotency
 slug: /financial/payhere-webhook-idempotency
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { payhereWebhookNodes, payhereWebhookEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # PayHere Payment Gateway, Webhooks & Idempotency
 
 HITHA integrates with PayHere to accept local credit/debit cards, FriMi, and bank transfers across Sri Lanka. Because payment gateway webhooks can be retried multiple times or delivered out-of-order over unreliable networks, strict cryptographic verification and database idempotency keys are enforced.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={payhereWebhookNodes}
+      edges={payhereWebhookEdges}
+      height={380}
+      caption="PayHere Webhook Idempotency: MD5 signature verification combined with PostgreSQL row lock prevents duplicate ledger credits on webhook network retries."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

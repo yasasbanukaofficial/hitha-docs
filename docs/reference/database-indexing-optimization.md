@@ -5,9 +5,25 @@ sidebar_label: Database Indexing & BRIN
 slug: /reference/database-indexing-optimization
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { indexingNodes, indexingEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # PostgreSQL Indexing Optimization & Block Range (BRIN) Performance
 
 High-throughput clinical and audit logging tables accumulate millions of records weekly. Choosing the correct database index type is vital to prevent write degradation and index bloat.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={indexingNodes}
+      edges={indexingEdges}
+      height={380}
+      caption="PostgreSQL BRIN Optimization: 18MB index footprint summarizes block ranges, achieving 2,800 writes/sec and sub-5ms range scans across 10M records."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

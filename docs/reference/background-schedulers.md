@@ -5,9 +5,25 @@ sidebar_label: Background Schedulers
 slug: /reference/background-schedulers
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { schedulersNodes, schedulersEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # Background Schedulers & Distributed Job Orchestration
 
-Background tasks in HITHA are orchestrated using ShedLock and Spring's `@Scheduled` annotation to guarantee single-instance execution across multi-pod Kubernetes deployments.
+Background tasks in HITHA are orchestrated using ShedLock and Spring's `@Scheduled` annotation with Java 21 Virtual Threads to guarantee single-instance execution across multi-pod deployments.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={schedulersNodes}
+      edges={schedulersEdges}
+      height={380}
+      caption="Distributed Job Orchestration: Leader node acquires ShedLock mutex before spawning non-blocking virtual threads for LOG-05 archival and queue dispatching."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

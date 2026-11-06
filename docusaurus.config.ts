@@ -108,7 +108,7 @@ const config: Config = {
         {
           title: 'Dictionary & Reference',
           items: [
-            {label: 'Technical Terms (සිංහල & English)', to: '/docs/reference/technical-terms-dictionary'},
+            {label: 'Architecture Glossary & Dictionary', to: '/docs/reference/technical-terms-dictionary'},
             {label: 'Engineering Timeline', to: '/docs/engineering-timeline/daily-timeline'},
           ],
         },

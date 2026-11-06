@@ -5,9 +5,26 @@ sidebar_label: Transactional Outbox
 slug: /reference/transactional-outbox-pattern
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { outboxNodes, outboxEdges, outboxSteps } from '@site/src/components/FlowDiagram/diagramData';
+
 # Transactional Outbox Pattern & Notification Resilience
 
 In a distributed telehealth platform, database state changes (e.g. confirming a patient booking) must never desynchronize from third-party side effects (e.g. sending SMS confirmations via TextLK or email receipts via SMTP).
+
+<BrowserOnly fallback={<div style={{ height: '400px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={outboxNodes}
+      edges={outboxEdges}
+      steps={outboxSteps}
+      height={400}
+      caption="Transactional Outbox Pattern: Spring Boot mutates entity + outbox_events in 1 ACID transaction, polled by ShedLock workers with DLQ quarantine."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

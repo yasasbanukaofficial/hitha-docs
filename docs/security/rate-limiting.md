@@ -6,17 +6,26 @@ slug: /security/rate-limiting
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import RateLimitingFlow from '@site/src/components/RateLimitingFlow';
+import { FlowDiagram } from '@site/src/components/FlowDiagram';
+import { rateLimitingNodes, rateLimitingEdges, rateLimitingSteps } from '@site/src/components/FlowDiagram/diagramData';
 
 # Distributed Multi-Tier Rate Limiting & Throttling
 
 To shield HITHA's Spring Boot backend from brute-force authentication attacks, scrapers, and denial-of-service attempts, our API gateway implements a 3-tier distributed token bucket rate limiter powered by Bucket4j and Redis.
 
-<BrowserOnly fallback={<div style={{ height: '330px', background: '#f8fbff', borderRadius: '16px' }} />}>
-  {() => <RateLimitingFlow />}
+<BrowserOnly fallback={<div style={{ height: '420px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={rateLimitingNodes}
+      edges={rateLimitingEdges}
+      steps={rateLimitingSteps}
+      height={420}
+      caption="Figure 2.1: Distributed Token Bucket Rate Limiting Architecture"
+    />
+  )}
 </BrowserOnly>
 
-All requests carry standard rate-limiting HTTP headers (`X-RateLimit-Remaining`, `X-RateLimit-Retry-After-Seconds`) and reject quota violations with `HTTP 429 Too Many Requests`.
+Incoming client requests pass through the rate-limiting gateway filter where Redis token buckets are decremented atomically. Requests that exceed their tier limits are rejected immediately with `HTTP 429 Too Many Requests` without touching the database or consuming HikariCP connections.
 
 ---
 

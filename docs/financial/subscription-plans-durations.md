@@ -5,9 +5,25 @@ sidebar_label: Subscriptions & Plans
 slug: /financial/subscription-plans-durations
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { subscriptionPlansNodes, subscriptionPlansEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # Subscription Plans, Monthly Pricing & Session Durations
 
-HITHA provides structured telehealth tiers for individuals, families, and enterprise corporate health packages.
+HITHA provides structured telehealth tiers for individuals, families, and enterprise corporate health packages with dynamic in-call extensions.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={subscriptionPlansNodes}
+      edges={subscriptionPlansEdges}
+      height={380}
+      caption="Subscription & Duration Flow: Bucket4j validates plan entitlement; LiveKit SFU provisions session with 15m/30m/45m expiry and +15m mid-call extension."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

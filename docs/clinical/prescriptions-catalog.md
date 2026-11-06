@@ -5,9 +5,25 @@ sidebar_label: Prescriptions & Drug Catalog
 slug: /clinical/prescriptions-catalog
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { prescriptionsCatalogNodes, prescriptionsCatalogEdges } from '@site/src/components/FlowDiagram/diagramData';
+
 # Clinical Prescriptions, Drug Catalog & Zero-PHI Compliance
 
 Writing and dispensing medical prescriptions requires strict data isolation to comply with healthcare privacy regulations. HITHA separates clinical prescription records from public database queries, enforcing cryptographic masking and zero-PHI (Protected Health Information) exposure in application logs.
+
+<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={prescriptionsCatalogNodes}
+      edges={prescriptionsCatalogEdges}
+      height={380}
+      caption="Zero-PHI Prescription Pipeline: Doctor selects medications from NMRA formulary; SHA-256 masking strips patient identity prior to logging and vault encryption."
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <defs>
+    <linearGradient id="springGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#6db33f" />
+      <stop offset="100%" stop-color="#4b8b29" />
+    </linearGradient>
+  </defs>
+  <path d="M50 10 C75 10 90 35 90 60 C90 85 65 90 50 90 C25 90 10 75 10 50 C10 25 35 10 50 10 Z" fill="url(#springGrad)" />
+  <path d="M32 64 C46 69 70 59 74 36 C59 41 36 50 32 64 Z" fill="#ffffff" />
+</svg>

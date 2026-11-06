@@ -7,6 +7,8 @@ import {
   useNodesState,
   useEdgesState,
   MarkerType,
+  Handle,
+  Position,
 } from '@xyflow/react';
 import '@xyflow/react/dist/style.css';
 
@@ -14,6 +16,7 @@ import '@xyflow/react/dist/style.css';
 function BackendNode({ data }: { data: any }) {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '1.5px solid #0f172a',
       borderRadius: '14px',
@@ -22,6 +25,10 @@ function BackendNode({ data }: { data: any }) {
       minWidth: '240px',
       textAlign: 'center'
     }}>
+      <Handle type="source" position={Position.Right} id="right" style={{ background: '#2160fd', width: 8, height: 8 }} />
+      <Handle type="target" position={Position.Right} id="right-target" style={{ background: '#64748b', top: '70%', width: 8, height: 8 }} />
+      <Handle type="source" position={Position.Bottom} id="bottom" style={{ background: '#16a34a', width: 8, height: 8 }} />
+
       {/* 3D Stack / Server Icon */}
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
         <svg width="44" height="44" viewBox="0 0 100 100" fill="none">
@@ -45,6 +52,7 @@ function BackendNode({ data }: { data: any }) {
 function ClientAppNode({ data }: { data: any }) {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '1.5px solid #2563eb',
       borderRadius: '14px',
@@ -53,6 +61,9 @@ function ClientAppNode({ data }: { data: any }) {
       minWidth: '240px',
       textAlign: 'center'
     }}>
+      <Handle type="target" position={Position.Top} id="top" style={{ background: '#16a34a', width: 8, height: 8 }} />
+      <Handle type="source" position={Position.Right} id="right" style={{ background: '#2160fd', width: 8, height: 8 }} />
+
       <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '6px' }}>
         {/* Modern Smartphone Model Icon */}
         <svg width="36" height="36" viewBox="0 0 100 100" fill="none">
@@ -90,6 +101,7 @@ function ClientAppNode({ data }: { data: any }) {
 function HithaCoreNode({ data }: { data: any }) {
   return (
     <div style={{
+      position: 'relative',
       background: '#ffffff',
       border: '2px solid #2160fd',
       borderRadius: '16px',
@@ -98,14 +110,20 @@ function HithaCoreNode({ data }: { data: any }) {
       minWidth: '260px',
       textAlign: 'center'
     }}>
-      {/* Official HITHA Brand Cross & Shield SVG Model */}
-      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '8px' }}>
-        <svg width="50" height="50" viewBox="0 0 100 100" fill="none">
-          <rect width="100" height="100" rx="22" fill="#2160fd" />
-          {/* Medical Cross + Tech Nodes */}
-          <rect x="42" y="24" width="16" height="52" rx="4" fill="#ffffff" />
-          <rect x="24" y="42" width="52" height="16" rx="4" fill="#ffffff" />
-          <circle cx="50" cy="50" r="4" fill="#2160fd" />
+      <Handle type="target" position={Position.Left} id="left-top" style={{ background: '#2160fd', top: '25%', width: 8, height: 8 }} />
+      <Handle type="source" position={Position.Left} id="left-return" style={{ background: '#64748b', top: '45%', width: 8, height: 8 }} />
+      <Handle type="target" position={Position.Left} id="left-bottom" style={{ background: '#2160fd', top: '75%', width: 8, height: 8 }} />
+
+      <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '10px' }}>
+        {/* 3D Cyan & Blue Split Core Icon */}
+        <svg width="52" height="52" viewBox="0 0 100 100" fill="none">
+          <ellipse cx="50" cy="28" rx="32" ry="12" fill="#2160fd" />
+          <path d="M18 28 v20 c0 7 14 12 32 12 s32 -5 32 -12 v-20" fill="#00a8b5" />
+          <ellipse cx="50" cy="48" rx="32" ry="12" fill="#1d4ed8" />
+          <path d="M18 48 v20 c0 7 14 12 32 12 s32 -5 32 -12 v-20" fill="#2563eb" />
+          <ellipse cx="50" cy="68" rx="32" ry="12" fill="#0284c7" />
+          <circle cx="32" cy="46" r="3" fill="#ffffff" />
+          <circle cx="32" cy="66" r="3" fill="#ffffff" />
         </svg>
       </div>
 
@@ -131,8 +149,8 @@ function HithaCoreNode({ data }: { data: any }) {
 
 const initialNodes = [
   { id: 'backend', type: 'backendNode', position: { x: 40, y: 30 }, data: {} },
-  { id: 'app', type: 'clientAppNode', position: { x: 40, y: 250 }, data: {} },
-  { id: 'hitha', type: 'hithaNode', position: { x: 580, y: 60 }, data: {} },
+  { id: 'app', type: 'clientAppNode', position: { x: 40, y: 260 }, data: {} },
+  { id: 'hitha', type: 'hithaNode', position: { x: 560, y: 50 }, data: {} },
 ];
 
 const initialEdges = [
@@ -141,7 +159,7 @@ const initialEdges = [
     source: 'backend',
     target: 'hitha',
     sourceHandle: 'right',
-    targetHandle: 'left',
+    targetHandle: 'left-top',
     animated: true,
     label: '① Create meeting using REST API',
     style: { stroke: '#2160fd', strokeWidth: 2 },
@@ -151,6 +169,8 @@ const initialEdges = [
     id: 'e2-return-id',
     source: 'hitha',
     target: 'backend',
+    sourceHandle: 'left-return',
+    targetHandle: 'right-target',
     animated: false,
     label: 'Returns meeting ID',
     style: { stroke: '#64748b', strokeWidth: 1.5 },
@@ -160,6 +180,8 @@ const initialEdges = [
     id: 'e3-add-participant',
     source: 'backend',
     target: 'hitha',
+    sourceHandle: 'right',
+    targetHandle: 'left-top',
     animated: true,
     label: '② Add participant / Generate auth token',
     style: { stroke: '#2160fd', strokeWidth: 2 },
@@ -169,6 +191,8 @@ const initialEdges = [
     id: 'e4-send-token',
     source: 'backend',
     target: 'app',
+    sourceHandle: 'bottom',
+    targetHandle: 'top',
     animated: true,
     label: '③ Auth token sent',
     style: { stroke: '#16a34a', strokeWidth: 2 },
@@ -178,10 +202,12 @@ const initialEdges = [
     id: 'e5-webrtc-stream',
     source: 'app',
     target: 'hitha',
+    sourceHandle: 'right',
+    targetHandle: 'left-bottom',
     animated: true,
-    label: '④ Persistent WebRTC Audio/Video Connection',
-    style: { stroke: '#2160fd', strokeWidth: 2.5 },
-    markerEnd: { type: MarkerType.ArrowClosed, color: '#2160fd' },
+    label: '④ Live Voice & Video Established (Sub-200ms)',
+    style: { stroke: '#0284c7', strokeWidth: 2.5 },
+    markerEnd: { type: MarkerType.ArrowClosed, color: '#0284c7' },
   },
 ];
 
