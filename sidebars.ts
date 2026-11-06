@@ -4,15 +4,15 @@ const sidebars: SidebarsConfig = {
   docsSidebar: [
     {
       type: 'category',
-      label: 'Live Video',
-      collapsed: true,
+      label: 'Guides',
+      collapsed: false,
       items: [
         'intro',
       ],
     },
     {
       type: 'category',
-      label: 'Voice Conferencing',
+      label: 'Clinical & Telehealth Engine',
       collapsed: false,
       items: [
         {
@@ -26,16 +26,18 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Interactive Livestream',
-      collapsed: true,
+      label: 'Logging, Audit & Storage Lifecycle',
+      collapsed: false,
       items: [
         'logging-audit/dual-plane-architecture',
+        'logging-audit/task-roadmap-and-progress',
+        'logging-audit/deep-technical-mechanisms',
       ],
     },
     {
       type: 'category',
-      label: 'Capabilities',
-      collapsed: true,
+      label: 'Security & Distributed Rate Limiting',
+      collapsed: false,
       items: [
         'security/rate-limiting',
         'security/sse-token-refresh',
@@ -44,8 +46,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'REST APIs',
-      collapsed: true,
+      label: 'Financial, Payments & Wallets',
+      collapsed: false,
       items: [
         'financial/payhere-webhook-idempotency',
         'financial/doctor-wallet-escrow',
@@ -54,8 +56,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: 'Architecture & System Reference',
-      collapsed: true,
+      label: 'Architecture Glossary & Reference',
+      collapsed: false,
       items: [
         'reference/technical-terms-dictionary',
         'reference/database-indexing-optimization',

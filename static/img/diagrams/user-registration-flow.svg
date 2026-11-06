@@ -1,72 +1,77 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" width="100%" height="100%">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 440" width="100%" height="100%">
   <defs>
-    <linearGradient id="regBg" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#04181a" />
-      <stop offset="100%" stop-color="#020d0f" />
-    </linearGradient>
-    <linearGradient id="hithaGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#00a8b5" stop-opacity="0.25" />
-      <stop offset="100%" stop-color="#4caf50" stop-opacity="0.05" />
-    </linearGradient>
-    <filter id="glow">
-      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#00a8b5" flood-opacity="0.2"/>
+    <pattern id="dotGrid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r="1.2" fill="#c7ddfc" />
+    </pattern>
+    <filter id="cardShadow" x="-10%" y="-10%" width="125%" height="125%">
+      <feDropShadow dx="0" dy="4" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.05" />
+      <feDropShadow dx="0" dy="1" stdDeviation="2" flood-color="#0f172a" flood-opacity="0.04" />
     </filter>
+    <marker id="arrow-blue" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#2160fd" />
+    </marker>
   </defs>
 
-  <rect width="800" height="360" rx="16" fill="url(#regBg)" stroke="#0f373d" stroke-width="1.5" />
+  <rect width="920" height="440" rx="16" fill="#f4f8ff" stroke="#e0ecfd" stroke-width="1.5" />
+  <rect width="920" height="440" rx="16" fill="url(#dotGrid)" />
 
-  <!-- 1. Patient / User Box -->
-  <rect x="35" y="125" width="150" height="110" rx="12" fill="#061f23" stroke="#00a8b5" stroke-width="1.5" filter="url(#glow)"/>
-  <circle cx="110" cy="160" r="16" fill="#00a8b5" fill-opacity="0.2" stroke="#00a8b5" stroke-width="1.5"/>
-  <path d="M 103 166 C 103 158 117 158 117 166" stroke="#00a8b5" stroke-width="2" fill="none"/>
-  <circle cx="110" cy="154" r="4" fill="#00a8b5" />
-  <text x="50" y="195" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">Patient Registration</text>
-  <text x="58" y="215" fill="#7c97af" font-family="'JetBrains Mono', monospace" font-size="10">POST /api/v1/auth/register</text>
+  <!-- USER (Left) -->
+  <g transform="translate(48, 80)">
+    <rect width="240" height="280" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)" />
+    <text x="120" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#0f172a">PATIENT SIGNUP</text>
+    <text x="120" y="72" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#64748b">Flutter Mobile App</text>
 
-  <!-- Arrow to Server -->
-  <path d="M 185 180 L 250 180" stroke="#00a8b5" stroke-width="2" />
-  <polygon points="250,180 242,175 242,185" fill="#00a8b5" />
+    <g transform="translate(20, 110)">
+      <rect width="200" height="55" rx="8" fill="#2160fd" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="12" font-weight="700" fill="#ffffff">POST /api/v1/auth/register</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#e0e7ff">Phone + Password + Name</text>
+    </g>
 
-  <!-- 2. HITHA Backend Engine -->
-  <rect x="250" y="70" width="240" height="220" rx="14" fill="url(#hithaGrad)" stroke="#00a8b5" stroke-width="1.5"/>
-  <rect x="265" y="85" width="105" height="20" rx="4" fill="#00a8b5" fill-opacity="0.2"/>
-  <text x="272" y="99" fill="#00a8b5" font-family="'JetBrains Mono', monospace" font-size="10" font-weight="700">HITHA CORE SYSTEM</text>
-  <text x="265" y="125" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800">Auth &amp; User Provisioning</text>
+    <g transform="translate(20, 185)">
+      <rect width="200" height="55" rx="8" fill="#f8faff" stroke="#e2eaf8" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#1e293b">OTP Verification</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2160fd">TextLK SMS 6-Digit</text>
+    </g>
+  </g>
 
-  <!-- Service Actions inside Backend -->
-  <rect x="265" y="140" width="210" height="30" rx="6" fill="#041d21" stroke="#00838d"/>
-  <text x="275" y="160" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">1. BCrypt Password Hash</text>
+  <!-- HITHA CORE (Center) -->
+  <g transform="translate(340, 80)">
+    <rect width="240" height="280" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)" />
+    <text x="120" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#2160fd">AUTH CONTROLLER</text>
+    <text x="120" y="72" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#64748b">Spring Security 6 + BCrypt</text>
 
-  <rect x="265" y="180" width="210" height="30" rx="6" fill="#041d21" stroke="#00838d"/>
-  <text x="275" y="200" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">2. Assign Role (PATIENT)</text>
+    <g transform="translate(20, 110)">
+      <rect width="200" height="55" rx="8" fill="#f8faff" stroke="#e2eaf8" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#1e293b">Password Hashing</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#64748b">BCrypt strength=12</text>
+    </g>
 
-  <rect x="265" y="220" width="210" height="30" rx="6" fill="#041d21" stroke="#00838d"/>
-  <text x="275" y="240" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">3. Create Inactive Wallet</text>
+    <g transform="translate(20, 185)">
+      <rect width="200" height="55" rx="8" fill="#eff6ff" stroke="#bfdbfe" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#1e40af">Audit Event Chain</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'JetBrains Mono', monospace" font-size="10" fill="#2563eb">USER_REGISTERED</text>
+    </g>
+  </g>
 
-  <text x="265" y="272" fill="#7c97af" font-family="'Plus Jakarta Sans', sans-serif" font-size="11">Spring Boot 3.3 Virtual Threads</text>
+  <!-- POSTGRESQL (Right) -->
+  <g transform="translate(630, 80)">
+    <rect width="240" height="280" rx="14" fill="#ffffff" stroke="#e2e8f0" stroke-width="1.5" filter="url(#cardShadow)" />
+    <text x="120" y="50" text-anchor="middle" font-family="'Plus Jakarta Sans', sans-serif" font-size="14" font-weight="800" fill="#0f172a">POSTGRESQL 16</text>
+    <text x="120" y="72" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" fill="#64748b">Relational Storage</text>
 
-  <!-- Forking Arrows to Destinations -->
-  <!-- Arrow to DB -->
-  <path d="M 490 155 L 560 110" stroke="#00a8b5" stroke-width="2" />
-  <polygon points="560,110 550,110 554,118" fill="#00a8b5" />
+    <g transform="translate(20, 110)">
+      <rect width="200" height="55" rx="8" fill="#f0fdf4" stroke="#bbf7d0" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#15803d">users Table Insert</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#166534">role=ROLE_PATIENT</text>
+    </g>
 
-  <!-- Arrow to Redis -->
-  <path d="M 490 220 L 560 250" stroke="#4caf50" stroke-width="2" />
-  <polygon points="560,250 553,243 550,252" fill="#4caf50" />
+    <g transform="translate(20, 185)">
+      <rect width="200" height="55" rx="8" fill="#f8faff" stroke="#e2eaf8" />
+      <text x="100" y="24" text-anchor="middle" font-family="'Inter', sans-serif" font-size="11" font-weight="600" fill="#1e293b">wallets Table Row</text>
+      <text x="100" y="42" text-anchor="middle" font-family="'Inter', sans-serif" font-size="10" fill="#64748b">Initial balance = 0.00</text>
+    </g>
+  </g>
 
-  <!-- 3. PostgreSQL Database -->
-  <rect x="560" y="60" width="210" height="100" rx="12" fill="#061b30" stroke="#00a8b5" stroke-width="1.5"/>
-  <rect x="575" y="75" width="28" height="28" rx="6" fill="#00a8b5" fill-opacity="0.2"/>
-  <text x="583" y="94" fill="#00a8b5" font-size="14">🐘</text>
-  <text x="612" y="88" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">PostgreSQL 16</text>
-  <text x="612" y="104" fill="#7c97af" font-family="'JetBrains Mono', monospace" font-size="10">users, roles, wallets tables</text>
-  <text x="575" y="135" fill="#a8d672" font-family="'JetBrains Mono', monospace" font-size="11">Atomic COMMIT • Read Commited</text>
-
-  <!-- 4. Redis Cache / Session -->
-  <rect x="560" y="200" width="210" height="100" rx="12" fill="#061b30" stroke="#4caf50" stroke-width="1.5"/>
-  <rect x="575" y="215" width="28" height="28" rx="6" fill="#4caf50" fill-opacity="0.2"/>
-  <text x="583" y="234" fill="#4caf50" font-size="14">⚡</text>
-  <text x="612" y="228" fill="#f8fafc" font-family="'Plus Jakarta Sans', sans-serif" font-size="13" font-weight="700">Redis 7 Cluster</text>
-  <text x="612" y="244" fill="#7c97af" font-family="'JetBrains Mono', monospace" font-size="10">JWT token blacklist &amp; sessions</text>
-  <text x="575" y="275" fill="#4caf50" font-family="'JetBrains Mono', monospace" font-size="11">TTL: 86400s • Sub-1ms auth verify</text>
+  <line x1="288" y1="220" x2="338" y2="220" stroke="#2160fd" stroke-width="1.8" marker-end="url(#arrow-blue)" />
+  <line x1="580" y1="220" x2="628" y2="220" stroke="#2160fd" stroke-width="1.8" marker-end="url(#arrow-blue)" />
 </svg>

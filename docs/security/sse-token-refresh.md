@@ -1,19 +1,25 @@
 ---
 id: sse-token-refresh
 title: Server-Sent Events (SSE) & Seamless Token Refresh Lifecycle
-sidebar_label: SSE & JWT Renewal Handshake
+sidebar_label: SSE & Token Refresh
 slug: /security/sse-token-refresh
 ---
 
-
 # Server-Sent Events (SSE) & Seamless Token Refresh Lifecycle
 
-Real-time notifications in HITHA (appointment bookings, payment confirmations, doctor call rings) are delivered using persistent Server-Sent Events (SSE) over HTTP streaming.
+Real-time clinical updates (doctor ringing alerts, in-call extension requests, wallet balance transfers) are pushed to clients using persistent HTTP Server-Sent Events (SSE).
 
 ---
 
-## 🔄 The Token Expiration Handshake
+## 1. SSE Connection Lifecycle
 
-- **Mechanism**: The backend runs an SSE heartbeat loop. When an active connection's JWT token approaches expiration, the server emits a structured `TOKEN_EXPIRED_WARNING` event over the established stream.
-- **Client Handshake**: The frontend intercepts this event, triggers a background refresh request to `/api/v1/auth/refresh-token`, receives a fresh token, and acknowledges the active connection without re-establishing TCP handshakes.
-- **Failure Resilience**: If token renewal fails, the connection terminates gracefully with an explicit redirect to the re-authentication page rather than hanging in a dead socket state.
+```bash
+# Patient establishing real-time event stream
+curl -N -H "Accept: text/event-stream"   -H "Authorization: Bearer <ACCESS_TOKEN>"   https://api.hitha.lk/api/v1/notifications/stream
+```
+
+1. **Handshake**: The client connects with a short-lived JWT access token (15-minute expiration).
+2. **Heartbeat Keep-Alive**: The backend emits `:ping
+
+` comments every 15 seconds to prevent intermediate proxy gateways from terminating the connection.
+3. **Seamless Token Refresh**: When the 15-minute access token approaches expiration, the client triggers a background refresh call (`POST /api/v1/auth/refresh-token`) exchanging the HTTP-only secure refresh cookie for a new JWT without disconnecting the active SSE stream.

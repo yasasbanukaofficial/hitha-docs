@@ -1,18 +1,38 @@
 ---
 id: prescriptions-catalog
 title: Clinical Prescriptions, Drug Catalog & Zero-PHI Compliance
-sidebar_label: Prescriptions & Drug Formulary
+sidebar_label: Prescriptions & Drug Catalog
 slug: /clinical/prescriptions-catalog
 ---
 
-
 # Clinical Prescriptions, Drug Catalog & Zero-PHI Compliance
 
-HITHA incorporates a Sri Lankan drug formulary and digital prescription system adhering strictly to the Medical Ordinance and clinical confidentiality regulations.
+Writing and dispensing medical prescriptions requires strict data isolation to comply with healthcare privacy regulations. HITHA separates clinical prescription records from public database queries, enforcing cryptographic masking and zero-PHI (Protected Health Information) exposure in application logs.
 
 ---
 
-## 💊 Clinical Integrity & Privacy
+## 1. Drug Catalog Formulary
 
-- **Drug Formulary**: Backed by pre-seeded Sri Lankan pharmaceutical drugs (`024-seed-drug-catalog.yaml`). Doctors query drugs via cached Redis endpoints.
-- **Audit Aspect Sanitization**: `ClinicalAuditAspect` intercepts all clinical save and read operations. The advice and clinical note payloads are strictly stripped of Personal Health Information (PHI) before metadata is passed to the audit engine.
+The system maintains a standardized formulary mapping approved generic compounds, brand equivalents, dosage routes, and legal dispensing schedules:
+
+- **Schedule II / Controlled Substances**: Requires dual-factor doctor approval and physical verification prior to digital signature generation.
+- **Standard Prescriptions**: Digitally signed using the doctor's RSA-2048 private key, generating an immutable, verifiable PDF QR code.
+
+---
+
+## 2. Zero-PHI Logging Policy
+
+Under no circumstances are patient names, diagnoses (ICD-10 codes), or prescribed drugs printed into application logs:
+
+```json
+// CORRECT (Sanitized Log Event)
+{
+  "timestamp": "2026-11-06T11:42:00Z",
+  "level": "INFO",
+  "correlationId": "8f3b2a9e-10d4-4817-cb38-920491820491",
+  "event": "PRESCRIPTION_ISSUED",
+  "prescriptionId": "rx_840219",
+  "doctorMaskedId": "doc_***401",
+  "patientMaskedId": "pat_***914"
+}
+```

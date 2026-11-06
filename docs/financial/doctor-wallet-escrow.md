@@ -1,26 +1,27 @@
 ---
 id: doctor-wallet-escrow
 title: Doctor Wallet, Escrow Balances & Double-Entry Ledger
-sidebar_label: Doctor Wallet & Escrow Ledger
+sidebar_label: Doctor Wallet & Escrow
 slug: /financial/doctor-wallet-escrow
 ---
 
-
 # Doctor Wallet, Escrow Balances & Double-Entry Ledger
 
-To protect patient funds while ensuring medical professionals receive timely payouts, HITHA enforces an **Escrow Custody Model** backed by double-entry accounting.
+HITHA operates a financial ledger ensuring doctor consultation earnings are held in escrow during active telehealth calls and only credited upon consultation completion.
 
-<div className="arch-diagram-wrapper">
-  <img src="/img/diagrams/escrow-ledger-split.svg" alt="Doctor Escrow Custody & Double Entry Ledger" width="100%" />
-  <div className="arch-diagram-caption">
-    <span><b>Figure 4.0:</b> Double-Entry Escrow Custody &amp; Platform Commission Deductions</span>
-    <span className="arch-diagram-badge">PAY-02 &amp; LEDGER</span>
-  </div>
+<div className="dyte-diagram-container">
+  <img src="/img/diagrams/escrow-ledger-split.svg" alt="Doctor Wallet Escrow & Double-Entry Ledger Architecture" width="100%" />
 </div>
+
+All financial operations follow double-entry bookkeeping with strict database constraints: no money is created or destroyed without equal debits and credits.
 
 ---
 
-## 🏦 Escrow Settlement Mechanism
+## 1. Ledger Split & Platform Commission
 
-- **Financial Integrity**: Managed via `DoctorWalletService` with transactional record updates on `doctor_wallets` and immutable logs on `wallet_transactions`.
-- **Payout Security**: Doctors request payouts to verified Sri Lankan bank accounts. Withdrawals transition through `PENDING_APPROVAL` ➔ `APPROVED` ➔ `SETTLED` with platform audit trails.
+When a consultation is confirmed:
+1. **Total Patient Fee Paid**: `LKR 3,500.00` received via PayHere gateway.
+2. **Escrow Custody**: Full `LKR 3,500.00` held in `LOCKED_IN_ESCROW` status.
+3. **Session Completion**:
+   - **Doctor Withdrawable (80%)**: `LKR 2,800.00` credited to doctor wallet.
+   - **Platform Commission (20%)**: `LKR 700.00` credited to HITHA operational revenue.
