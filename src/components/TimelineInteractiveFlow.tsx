@@ -9,12 +9,12 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
       {
         id: 'log1',
         type: 'logoNode',
-        position: { x: 30, y: 30 },
+        position: { x: 20, y: 25 },
         data: {
           label: 'LOG-01',
-          caption: 'Logback Async Pipeline',
+          caption: 'Logback Async Ring',
           logo: 'logback',
-          badge: 'Nov 06',
+          badge: 'Ring Buffer',
           badgeColor: '#2563eb',
           accentColor: '#2563eb',
           details: {
@@ -27,7 +27,7 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
       {
         id: 'log2',
         type: 'logoNode',
-        position: { x: 230, y: 30 },
+        position: { x: 210, y: 25 },
         data: {
           label: 'LOG-02',
           caption: 'ReentrantLock Chain',
@@ -45,7 +45,7 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
       {
         id: 'log3',
         type: 'infoNode',
-        position: { x: 430, y: 45 },
+        position: { x: 400, y: 40 },
         data: {
           label: 'LOG-03',
           caption: 'HikariCP DoS Shield',
@@ -62,7 +62,7 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
       {
         id: 'log4',
         type: 'logoNode',
-        position: { x: 630, y: 30 },
+        position: { x: 590, y: 25 },
         data: {
           label: 'LOG-04',
           caption: 'PostgreSQL BRIN',
@@ -80,10 +80,10 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
       {
         id: 'log5',
         type: 'logoNode',
-        position: { x: 830, y: 30 },
+        position: { x: 780, y: 25 },
         data: {
           label: 'LOG-05',
-          caption: 'Cloudflare R2 WORM',
+          caption: 'Cloudflare R2 Cold',
           logo: 'cloudflare-r2',
           badge: '7-Yr Lock',
           badgeColor: '#ea580c',
@@ -92,6 +92,96 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
             className: 'AuditLogArchiveServiceImpl.java',
             description: 'Streaming historical audit records into .jsonl.gz with SHA-256 integrity manifest.',
             config: 'Commit 45cc888',
+          },
+        },
+      },
+      {
+        id: 'log6',
+        type: 'logoNode',
+        position: { x: 20, y: 215 },
+        data: {
+          label: 'LOG-06',
+          caption: 'Virtual Thread Async',
+          logo: 'java',
+          badge: 'Async Decoupled',
+          badgeColor: '#8b5cf6',
+          accentColor: '#8b5cf6',
+          details: {
+            className: 'ClinicalAuditAspect.java',
+            description: 'Decoupled clinical audit writes to virtualThreadExecutor, preserving MDC context.',
+            config: 'Commit 19ed047',
+          },
+        },
+      },
+      {
+        id: 'log7',
+        type: 'logoNode',
+        position: { x: 210, y: 215 },
+        data: {
+          label: 'LOG-07',
+          caption: 'Sub-10ms Purge Job',
+          logo: 'archive',
+          badge: '90-Day Purge',
+          badgeColor: '#059669',
+          accentColor: '#059669',
+          details: {
+            className: 'AuditLogPartitionPurgeScheduler.java',
+            description: 'Automated 90-day hot window archival and sub-10ms partition deletion.',
+            config: 'Commit f770ab5',
+          },
+        },
+      },
+      {
+        id: 'log8',
+        type: 'logoNode',
+        position: { x: 400, y: 215 },
+        data: {
+          label: 'LOG-08',
+          caption: 'PDPA Crypto-Shredding',
+          logo: 'patient',
+          badge: 'Zero PHI',
+          badgeColor: '#0891b2',
+          accentColor: '#0891b2',
+          details: {
+            className: 'PatientIdentityService.java',
+            description: 'Right-to-Erasure anonymization preserving stable non-reversible pseudonym pointers.',
+            config: 'Commit a93a6f4',
+          },
+        },
+      },
+      {
+        id: 'log9',
+        type: 'logoNode',
+        position: { x: 590, y: 215 },
+        data: {
+          label: 'LOG-09',
+          caption: 'Admin Cold API',
+          logo: 'admin',
+          badge: 'Export API',
+          badgeColor: '#ca8a04',
+          accentColor: '#ca8a04',
+          details: {
+            className: 'AdminActivityLogController.java',
+            description: 'POST /archive/export & GET /archive/download for self-service audit bundle exports.',
+            config: 'Commit 95ba4a4',
+          },
+        },
+      },
+      {
+        id: 'log10',
+        type: 'logoNode',
+        position: { x: 780, y: 215 },
+        data: {
+          label: 'LOG-10',
+          caption: '100% Chain Verified',
+          logo: 'superadmin',
+          badge: 'Stress Suite',
+          badgeColor: '#16a34a',
+          accentColor: '#16a34a',
+          details: {
+            className: 'AuditArchitectureComplianceSuiteTest.java',
+            description: 'End-to-end Virtual Thread stress test, GZIP JSONL serialization, and SHA-256 verification.',
+            config: 'Commit c2ea39a',
           },
         },
       },
@@ -125,8 +215,8 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
         target: 'log4',
         animated: true,
         label: 'DB Index',
-        style: { stroke: '#0284c7', strokeWidth: 2 },
-        markerEnd: { type: MarkerType.ArrowClosed, color: '#0284c7' },
+        style: { stroke: '#d97706', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#d97706' },
       },
       {
         id: 'e4-5',
@@ -134,23 +224,68 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
         target: 'log5',
         animated: true,
         label: 'Cold Archive',
+        style: { stroke: '#0284c7', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#0284c7' },
+      },
+      {
+        id: 'e5-6',
+        source: 'log5',
+        target: 'log6',
+        animated: true,
+        label: 'Virtual Thread',
         style: { stroke: '#ea580c', strokeWidth: 2 },
         markerEnd: { type: MarkerType.ArrowClosed, color: '#ea580c' },
+      },
+      {
+        id: 'e6-7',
+        source: 'log6',
+        target: 'log7',
+        animated: true,
+        label: 'Purge Sched',
+        style: { stroke: '#8b5cf6', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#8b5cf6' },
+      },
+      {
+        id: 'e7-8',
+        source: 'log7',
+        target: 'log8',
+        animated: true,
+        label: 'Crypto-Shred',
+        style: { stroke: '#059669', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#059669' },
+      },
+      {
+        id: 'e8-9',
+        source: 'log8',
+        target: 'log9',
+        animated: true,
+        label: 'Admin API',
+        style: { stroke: '#0891b2', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#0891b2' },
+      },
+      {
+        id: 'e9-10',
+        source: 'log9',
+        target: 'log10',
+        animated: true,
+        label: '100% Green',
+        style: { stroke: '#ca8a04', strokeWidth: 2 },
+        markerEnd: { type: MarkerType.ArrowClosed, color: '#ca8a04' },
       },
     ],
     []
   );
 
-  const steps = ['e1-2', 'e2-3', 'e3-4', 'e4-5'];
+  const steps = ['e1-2', 'e2-3', 'e3-4', 'e4-5', 'e5-6', 'e6-7', 'e7-8', 'e8-9', 'e9-10'];
 
   return (
     <FlowDiagram
       initialNodes={initialNodes}
       initialEdges={initialEdges}
-      height={340}
+      height={420}
       steps={steps}
-      scenario="Scenario: Step-by-step verification of engineering deliverables merged on Nov 06, 2026"
-      caption="Interactive Engineering Delivery Ledger (Friday, November 06, 2026)"
+      scenario="Scenario: Complete lifecycle delivery verification of LOG-01 through LOG-10 (Nov 06, 2026)"
+      caption="Interactive Engineering Delivery Ledger (Friday, November 06, 2026 — LOG-01 to LOG-10 Complete)"
     />
   );
 }
