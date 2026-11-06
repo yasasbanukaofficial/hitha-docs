@@ -1817,3 +1817,119 @@ code {
   font-weight: 600;
   color: #2160fd;
 }
+
+/* ========================================================
+   LANDING HERO BLUEPRINT BACKGROUND & 3-CARD GRID
+   ======================================================== */
+.hero-section {
+  position: relative;
+  padding: 80px 24px 60px;
+  text-align: center;
+  background-color: #f8fbff;
+  background-image: radial-gradient(#d5e5fc 1.25px, transparent 1.25px);
+  background-size: 20px 20px;
+}
+
+[data-theme='dark'] .hero-section {
+  background-color: #071520;
+  background-image: radial-gradient(rgba(255, 255, 255, 0.08) 1.25px, transparent 1.25px);
+  background-size: 20px 20px;
+}
+
+.hero-feature-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 24px;
+  max-width: 1100px;
+  margin: 40px auto 0;
+  text-align: left;
+}
+
+.hero-card-link {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 14px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  text-decoration: none !important;
+  box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hero-card-link:hover {
+  border-color: #2160fd;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px -4px rgba(33, 96, 253, 0.14);
+}
+
+[data-theme='dark'] .hero-card-link {
+  background: #0d1520;
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+[data-theme='dark'] .hero-card-link:hover {
+  background: #111d2c;
+  border-color: rgba(33, 96, 253, 0.45);
+}
+
+.hero-card-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.hero-card-icon.cyan {
+  background: #eff6ff;
+  color: #2160fd;
+}
+
+.hero-card-icon.emerald {
+  background: #f0fdf4;
+  color: #16a34a;
+}
+
+.hero-card-icon.amber {
+  background: #fffbeb;
+  color: #d97706;
+}
+
+.hero-card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin: 0 0 8px 0;
+}
+
+[data-theme='dark'] .hero-card-title {
+  color: #ffffff;
+}
+
+.hero-card-desc {
+  font-size: 0.88rem;
+  color: #64748b;
+  line-height: 1.55;
+  margin: 0 0 20px 0;
+  flex: 1;
+}
+
+.hero-card-cta {
+  font-size: 13px;
+  font-weight: 600;
+  color: #2160fd;
+  display: inline-flex;
+  align-items: center;
+}
+
+.hero-inline-code {
+  font-family: var(--ifm-font-family-monospace);
+  background: #f1f5f9;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 1px 4px;
+  font-size: 11px;
+}

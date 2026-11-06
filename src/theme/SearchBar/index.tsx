@@ -7,14 +7,20 @@ export default function CustomNavbarSearchBar(): React.JSX.Element {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      // Ignore if user is already typing in an input or textarea or contentEditable
+      const target = e.target as HTMLElement | null;
+      if (
+        target?.tagName === 'INPUT' || 
+        target?.tagName === 'TEXTAREA' || 
+        target?.isContentEditable
+      ) {
+        return;
+      }
+
       if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
         e.preventDefault();
         setIsOpen(true);
-      } else if (
-        e.key === '/' && 
-        document.activeElement?.tagName !== 'INPUT' && 
-        document.activeElement?.tagName !== 'TEXTAREA'
-      ) {
+      } else if (e.key === '/') {
         e.preventDefault();
         setIsOpen(true);
       }
@@ -34,7 +40,7 @@ export default function CustomNavbarSearchBar(): React.JSX.Element {
         <Search className="navbar-search-icon" />
         <span className="navbar-search-placeholder">Search</span>
         <span className="navbar-search-shortcut">
-          <kbd>⌘K</kbd>
+          <kbd>/</kbd>
         </span>
       </button>
 
