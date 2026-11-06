@@ -5,13 +5,16 @@ sidebar_label: Distributed Rate Limiting
 slug: /security/rate-limiting
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import RateLimitingFlow from '@site/src/components/RateLimitingFlow';
+
 # Distributed Multi-Tier Rate Limiting & Throttling
 
 To shield HITHA's Spring Boot backend from brute-force authentication attacks, scrapers, and denial-of-service attempts, our API gateway implements a 3-tier distributed token bucket rate limiter powered by Bucket4j and Redis.
 
-<div className="dyte-diagram-container">
-  <img src="/img/diagrams/rate-limiting-tiers.svg" alt="Distributed Multi-Tier Rate Limiting Architecture" width="100%" />
-</div>
+<BrowserOnly fallback={<div style={{ height: '330px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => <RateLimitingFlow />}
+</BrowserOnly>
 
 All requests carry standard rate-limiting HTTP headers (`X-RateLimit-Remaining`, `X-RateLimit-Retry-After-Seconds`) and reject quota violations with `HTTP 429 Too Many Requests`.
 

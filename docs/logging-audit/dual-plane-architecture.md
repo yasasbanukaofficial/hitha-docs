@@ -5,13 +5,16 @@ sidebar_label: Dual-Plane Logging Architecture
 slug: /logging-audit/dual-plane-architecture
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import DualPlaneFlow from '@site/src/components/DualPlaneFlow';
+
 # Enterprise Dual-Plane Logging & Storage Architecture
 
 Telehealth systems generate millions of high-frequency debug, connection pool, and trace logs alongside legally binding clinical audit trails. Storing all operational logs in PostgreSQL causes severe database bloat, degrading performance and increasing costs.
 
-<div className="dyte-diagram-container">
-  <img src="/img/diagrams/dual-plane-flow.svg" alt="Dual-Plane Logging Architecture" width="100%" />
-</div>
+<BrowserOnly fallback={<div style={{ height: '330px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => <DualPlaneFlow />}
+</BrowserOnly>
 
 HITHA resolves this by enforcing a strict **Dual-Plane Separation Architecture** separating transient operational logs from immutable compliance logs.
 

@@ -5,34 +5,44 @@ sidebar_label: Daily Engineering Timeline
 slug: /engineering-timeline/daily-timeline
 ---
 
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import TimelineInteractiveFlow from '@site/src/components/TimelineInteractiveFlow';
 
 # Engineering Daily Timeline & Work Accomplished
 
-This timeline records all engineering changes, security remediations, performance optimizations, and features delivered to the Hitha codebase.
+Visual execution map of deliverables, optimizations, and security patches merged into the Hitha server.
+
+<BrowserOnly fallback={<div style={{ height: '340px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => <TimelineInteractiveFlow />}
+</BrowserOnly>
 
 ---
 
-### **Today (November 06, 2026): Enterprise Dual-Plane Logging & Audit Architecture Delivery**
-- **LOG-01 (`e4af8e6`)**: Deployed `logback-spring.xml` with non-blocking `AsyncAppender` (8,192 event ring buffer), hourly/100MB GZIP rolling policy, 5GB hard disk cap, and 14-day auto-eviction. Enriched `CorrelationIdFilter.java` with 5 MDC dimensions (`correlationId`, `actorId`, `actorRole`, `clientIp`, `jurisdiction`).
-- **LOG-02 (`0dcb3b6`)**: Eliminated hash-chain concurrency race conditions under Java 21 Virtual Thread bursts by wrapping `findLatestHashChainValue()`, `computeHashV2()`, and repository save in an explicit JVM `ReentrantLock` in `AuditLogServiceImpl.java`. Verified with 20 concurrent Virtual Threads in `AuditLogServiceConcurrencyTest`.
-- **LOG-03 (`be9630d`)**: Protected the 8-connection HikariCP database pool against 401 unauthenticated DoS floods by adding an in-memory sliding window rate limiter in `AuditAuthenticationEntryPoint.java` (`MAX_DB_AUDITS_PER_IP_PER_MINUTE = 5`), routing volumetric floods to Plane A local logs. Verified with `AuditAuthenticationEntryPointTest`.
-- **LOG-04 (`a1194c7`)**: Dropped unused `idx_audit_payload` GIN index via Liquibase migration `004-optimize-audit-logs-indexes.yaml`. Added `idx_audit_created_brin` (Block Range Index) and `idx_audit_created_action` (Composite). Implemented a 60-second in-memory TTL stats cache in `AdminActivityLogServiceImpl.java`.
-- **LOG-05 (`45cc888`)**: Implemented cold-storage audit archiver `AuditLogArchiveServiceImpl.java` streaming historical audit records into `.jsonl.gz` archives with companion SHA-256 manifests for Cloudflare R2 object storage. Verified with `AuditLogArchiveServiceTest`.
+## 📅 Chronological Delivery Ledger
 
----
+### **Today (November 06, 2026): Enterprise Dual-Plane Logging & Audit Architecture**
 
-### **November 04, 2026: Mid-Call Consultation Extension & Multi-Session Delivery**
-- **CALL-EXT-01 (`d5492c6`)**: Allowed multi-session initial duration selection (15m, 30m, 45m) on on-demand Call Now initiation.
-- **BUG-QUOTA-01 (`db3bb1f`)**: Resolved PostgreSQL read-only transaction conflict on subscription eligibility check.
-- **CALL-EXT-02 to 04 (`5caa7f5`)**: Delivered mid-call duration extensions, real-time signaling over LiveKit/SSE, and multi-credit settlement from subscription quotas.
-- **SCALAR API (`daf8d71`)**: Synchronized Scalar OpenAPI reference documentation for mid-call extension and rate-limiting endpoints.
+1. **LOG-01 (`e4af8e6`) — Non-Blocking Async Logback Pipeline**
+   - Configured `logback-spring.xml` with non-blocking `AsyncAppender` (8,192 event ring buffer).
+   - Enforced 100MB/hourly GZIP rotation, 5GB hard disk cap, and 14-day auto-eviction.
+   - Enriched `CorrelationIdFilter` with 5 MDC diagnostic dimensions (`correlationId`, `actorId`, `actorRole`, `clientIp`, `jurisdiction`).
 
----
+2. **LOG-02 (`0dcb3b6`) — Concurrency-Safe Cryptographic Hash Chaining**
+   - Eliminated hash-chain concurrency race conditions under Java 21 Virtual Thread bursts.
+   - Guarded `findLatestHashChainValue()`, `computeHashV2()`, and repository save with JVM `ReentrantLock` in `AuditLogServiceImpl`.
+   - Verified with 20 concurrent Virtual Threads in `AuditLogServiceConcurrencyTest`.
 
-### **November 03, 2026: Multi-Tier Distributed Rate Limiting (RL-01 to RL-09)**
-- **RL-01 & RL-02 (`c31dc38`)**: Implemented Phase 2 Edge IP Filter and migrated authentication/phone SMS cooldowns to distributed Bucket4j token buckets.
-- **RL-04 & RL-07 (`226b657`)**: Implemented `@RateLimited` annotation and Spring AOP aspect with tiered endpoint bandwidth protection.
-- **RL-06 (`a94fa44`)**: Enforced Tier 2 rate limit on PayHere payment webhooks.
-- **RL-08 & RL-09 (`fb940b9`)**: Enforced clinical concurrency limits (RL-08) and Micrometer DDoS telemetry counters (RL-09).
+3. **LOG-03 (`be9630d`) — HikariCP Connection Pool DOS Shield**
+   - Protected the 8-connection HikariCP database pool against 401 unauthenticated DoS floods.
+   - Added in-memory sliding window limiter in `AuditAuthenticationEntryPoint` (`MAX_DB_AUDITS_PER_IP_PER_MINUTE = 5`).
+   - Floods routed directly to Plane A local logs without acquiring JDBC connections.
+
+4. **LOG-04 (`a1194c7`) — PostgreSQL BRIN Index & TTL In-Memory Cache**
+   - Dropped bloated 12GB `idx_audit_payload` GIN index via Liquibase migration `004-optimize-audit-logs-indexes.yaml`.
+   - Added lightweight 18MB `idx_audit_created_brin` (Block Range Index), delivering 11.6x faster write throughput.
+   - Added 60-second in-memory stats cache in `AdminActivityLogServiceImpl` for sub-50ms dashboard response times.
+
+5. **LOG-05 (`45cc888`) — Cloudflare R2 Cold Archival Engine**
+   - Created `AuditLogArchiveServiceImpl` streaming >90-day records into `.jsonl.gz` bundles.
+   - Generated accompanying SHA-256 digital integrity manifests.
+   - Enforced 7-year WORM compliance lock on Cloudflare R2 cold buckets.
