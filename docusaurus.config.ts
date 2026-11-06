@@ -56,17 +56,36 @@ const config: Config = {
   themeConfig: {
     image: 'img/hitha-social-card.jpg',
     colorMode: {
-      defaultMode: 'dark',
-      respectPrefersColorScheme: true,
+      defaultMode: 'light',
+      respectPrefersColorScheme: false,
     },
     navbar: {
-      title: 'HITHA Architecture',
+      title: 'HITHA',
       items: [
         {
-          type: 'docSidebar',
-          sidebarId: 'docsSidebar',
+          to: '/docs/clinical/livekit-webrtc',
           position: 'left',
-          label: 'Documentation',
+          label: 'Guides',
+        },
+        {
+          to: '/docs/clinical/livekit-webrtc',
+          position: 'left',
+          label: 'SDKs',
+        },
+        {
+          to: '/docs/clinical/livekit-webrtc',
+          position: 'left',
+          label: 'REST API',
+        },
+        {
+          to: '/docs/clinical/livekit-webrtc',
+          position: 'left',
+          label: 'Resources',
+        },
+        {
+          to: '/docs/clinical/livekit-webrtc',
+          position: 'left',
+          label: 'Support',
         },
         {
           href: 'https://github.com/yasasbanukaofficial/hitha-docs',

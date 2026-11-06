@@ -2,21 +2,40 @@ import type {SidebarsConfig} from '@docusaurus/plugin-content-docs';
 
 const sidebars: SidebarsConfig = {
   docsSidebar: [
-    'intro',
     {
       type: 'category',
-      label: '1. Logging, Audit & Storage Lifecycle',
-      collapsed: false,
+      label: 'Live Video',
+      collapsed: true,
       items: [
-        'logging-audit/dual-plane-architecture',
-        'logging-audit/task-roadmap-and-progress',
-        'logging-audit/deep-technical-mechanisms',
+        'intro',
       ],
     },
     {
       type: 'category',
-      label: '2. Security, Rate Limiting & Auth',
+      label: 'Voice Conferencing',
       collapsed: false,
+      items: [
+        {
+          type: 'doc',
+          id: 'clinical/livekit-webrtc',
+          label: 'Server Integration',
+        },
+        'clinical/on-demand-queue',
+        'clinical/prescriptions-catalog',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Interactive Livestream',
+      collapsed: true,
+      items: [
+        'logging-audit/dual-plane-architecture',
+      ],
+    },
+    {
+      type: 'category',
+      label: 'Capabilities',
+      collapsed: true,
       items: [
         'security/rate-limiting',
         'security/sse-token-refresh',
@@ -25,18 +44,8 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: '3. Clinical, Telehealth & RTC',
-      collapsed: false,
-      items: [
-        'clinical/livekit-webrtc',
-        'clinical/on-demand-queue',
-        'clinical/prescriptions-catalog',
-      ],
-    },
-    {
-      type: 'category',
-      label: '4. Financial, Payments & Wallets',
-      collapsed: false,
+      label: 'REST APIs',
+      collapsed: true,
       items: [
         'financial/payhere-webhook-idempotency',
         'financial/doctor-wallet-escrow',
@@ -45,21 +54,14 @@ const sidebars: SidebarsConfig = {
     },
     {
       type: 'category',
-      label: '5. Architecture Glossary & Reference',
-      collapsed: false,
+      label: 'Architecture & System Reference',
+      collapsed: true,
       items: [
         'reference/technical-terms-dictionary',
         'reference/database-indexing-optimization',
         'reference/caching-architecture',
         'reference/transactional-outbox-pattern',
         'reference/background-schedulers',
-      ],
-    },
-    {
-      type: 'category',
-      label: '6. Engineering Daily Timeline',
-      collapsed: false,
-      items: [
         'engineering-timeline/daily-timeline',
       ],
     },
