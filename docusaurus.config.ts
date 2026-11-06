@@ -61,12 +61,6 @@ const config: Config = {
     },
     navbar: {
       title: 'HITHA',
-      logo: {
-        alt: 'HITHA Telehealth Platform',
-        src: 'img/hitha-logo.png',
-        width: 30,
-        height: 30,
-      },
       items: [
         {
           to: '/docs',
