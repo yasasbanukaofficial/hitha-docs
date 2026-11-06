@@ -26,7 +26,7 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          routeBasePath: '/',
+          routeBasePath: '/docs',
         },
         blog: false,
         theme: {
@@ -44,7 +44,7 @@ const config: Config = {
         language: ['en'],
         highlightSearchTermsOnTargetPage: true,
         explicitSearchResultPath: true,
-        docsRouteBasePath: '/',
+        docsRouteBasePath: '/docs',
       },
     ],
   ],
@@ -77,16 +77,16 @@ const config: Config = {
         {
           title: 'Architecture',
           items: [
-            {label: 'Overview & Principles', to: '/'},
-            {label: 'Dual-Plane Logging', to: '/logging-audit/dual-plane-architecture'},
-            {label: 'Distributed Rate Limiting', to: '/security/rate-limiting'},
+            {label: 'Overview & Principles', to: '/docs/'},
+            {label: 'Dual-Plane Logging', to: '/docs/logging-audit/dual-plane-architecture'},
+            {label: 'Distributed Rate Limiting', to: '/docs/security/rate-limiting'},
           ],
         },
         {
           title: 'Dictionary & Reference',
           items: [
-            {label: 'Technical Terms (සිංහල & English)', to: '/reference/technical-terms-dictionary'},
-            {label: 'Engineering Timeline', to: '/engineering-timeline/daily-timeline'},
+            {label: 'Technical Terms (සිංහල & English)', to: '/docs/reference/technical-terms-dictionary'},
+            {label: 'Engineering Timeline', to: '/docs/engineering-timeline/daily-timeline'},
           ],
         },
       ],

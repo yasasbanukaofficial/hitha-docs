@@ -1,30 +1,273 @@
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
 
-/* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #2e8555;
-  --ifm-color-primary-dark: #29784c;
-  --ifm-color-primary-darker: #277148;
-  --ifm-color-primary-darkest: #205d3b;
-  --ifm-color-primary-light: #33925d;
-  --ifm-color-primary-lighter: #359962;
-  --ifm-color-primary-lightest: #3cad6e;
-  --ifm-code-font-size: 95%;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
+  --ifm-font-family-base: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --ifm-font-family-monospace: 'JetBrains Mono', SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  /* Premium Modern Palette: Dark Slate / Obsidian / Emerald Glow */
+  --ifm-color-primary: #10b981;
+  --ifm-color-primary-dark: #059669;
+  --ifm-color-primary-darker: #047857;
+  --ifm-color-primary-darkest: #064e3b;
+  --ifm-color-primary-light: #34d399;
+  --ifm-color-primary-lighter: #6ee7b7;
+  --ifm-color-primary-lightest: #a7f3d0;
+
+  --ifm-background-color: #f8fafc;
+  --ifm-background-surface-color: #ffffff;
+  --ifm-navbar-background-color: rgba(255, 255, 255, 0.85);
+  --ifm-navbar-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+
+  --ifm-card-border-radius: 14px;
+  --ifm-code-font-size: 88%;
+  --ifm-line-height-base: 1.7;
 }
 
-/* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
-  --ifm-color-primary: #25c2a0;
-  --ifm-color-primary-dark: #21af90;
-  --ifm-color-primary-darker: #1fa588;
-  --ifm-color-primary-darkest: #1a8870;
-  --ifm-color-primary-light: #29d5b0;
-  --ifm-color-primary-lighter: #32d8b4;
-  --ifm-color-primary-lightest: #4fddbf;
-  --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
+  --ifm-color-primary: #10b981;
+  --ifm-color-primary-dark: #059669;
+  --ifm-color-primary-darker: #047857;
+  --ifm-color-primary-darkest: #064e3b;
+  --ifm-color-primary-light: #34d399;
+  --ifm-color-primary-lighter: #6ee7b7;
+  --ifm-color-primary-lightest: #a7f3d0;
+
+  --ifm-background-color: #0b0f19;
+  --ifm-background-surface-color: #111827;
+  --ifm-navbar-background-color: rgba(11, 15, 25, 0.85);
+  --ifm-navbar-shadow: 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  --ifm-toc-border-color: rgba(255, 255, 255, 0.08);
+  --ifm-hr-border-color: rgba(255, 255, 255, 0.08);
+}
+
+/* Glassmorphism Navbar */
+.navbar {
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  height: 68px;
+  padding: 0 24px;
+}
+
+.navbar__brand {
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  font-size: 1.15rem;
+}
+
+.navbar__title {
+  background: linear-gradient(135deg, #10b981 0%, #38bdf8 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* ==========================================================================
+   Google-Style Large Search Bar Styling
+   ========================================================================== */
+.navbar__search {
+  flex: 1;
+  max-width: 580px;
+  margin: 0 24px;
+}
+
+.navbar__search .search-bar {
+  width: 100%;
+}
+
+.navbar__search input {
+  width: 100% !important;
+  height: 42px !important;
+  background-color: rgba(255, 255, 255, 0.07) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  border-radius: 9999px !important;
+  padding: 0 46px 0 20px !important;
+  font-size: 14px !important;
+  color: var(--ifm-font-color-base) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04) !important;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.navbar__search input:focus {
+  background-color: var(--ifm-background-surface-color) !important;
+  border-color: #10b981 !important;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.25), 0 8px 24px rgba(0, 0, 0, 0.12) !important;
+  outline: none !important;
+}
+
+[data-theme='light'] .navbar__search input {
+  background-color: #f1f5f9 !important;
+  border-color: #cbd5e1 !important;
+}
+
+[data-theme='light'] .navbar__search input:focus {
+  background-color: #ffffff !important;
+}
+
+/* Hero & Feature Cards */
+.heroBanner {
+  padding: 4.5rem 0 3rem 0;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  background: radial-gradient(circle at 50% 20%, rgba(16, 185, 129, 0.12) 0%, transparent 60%);
+}
+
+.heroTitle {
+  font-size: 3.2rem;
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 1.2rem;
+}
+
+.heroSubtitle {
+  font-size: 1.25rem;
+  color: var(--ifm-color-emphasis-700);
+  max-width: 680px;
+  margin: 0 auto 2.5rem auto;
+  line-height: 1.6;
+}
+
+/* Google-Style Center Search Box on Hero */
+.googleSearchHero {
+  max-width: 680px;
+  margin: 0 auto 3rem auto;
+  position: relative;
+}
+
+.googleSearchInput {
+  width: 100%;
+  height: 56px;
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+  padding: 0 54px 0 24px;
+  font-size: 16px;
+  font-family: inherit;
+  color: var(--ifm-font-color-base);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.googleSearchInput:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px rgba(16, 185, 129, 0.25), 0 12px 36px rgba(0, 0, 0, 0.2);
+}
+
+.googleSearchIcon {
+  position: absolute;
+  right: 22px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--ifm-color-primary);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+/* Modern Card Grid */
+.cardGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin: 2.5rem 0;
+}
+
+.modernCard {
+  background: var(--ifm-background-surface-color);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--ifm-card-border-radius);
+  padding: 24px;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  text-decoration: none !important;
+  color: inherit;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.modernCard:hover {
+  transform: translateY(-3px);
+  border-color: rgba(16, 185, 129, 0.4);
+  box-shadow: 0 12px 30px -10px rgba(16, 185, 129, 0.15);
+  color: inherit;
+}
+
+.modernCardBadge {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: rgba(16, 185, 129, 0.12);
+  color: #10b981;
+  margin-bottom: 14px;
+  align-self: flex-start;
+}
+
+.modernCardTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  letter-spacing: -0.01em;
+}
+
+.modernCardDesc {
+  font-size: 0.92rem;
+  color: var(--ifm-color-emphasis-600);
+  line-height: 1.55;
+  margin: 0;
+}
+
+/* Tabs & Code blocks */
+.tabs {
+  border-bottom: 2px solid rgba(255, 255, 255, 0.08);
+  margin-bottom: 1.25rem;
+}
+
+.tabs__item {
+  font-weight: 600;
+  font-size: 0.95rem;
+  border-radius: 8px 8px 0 0;
+  padding: 10px 18px;
+}
+
+.tabs__item--active {
+  border-bottom-color: var(--ifm-color-primary) !important;
+  color: var(--ifm-color-primary) !important;
+}
+
+/* Tables */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  margin: 1.5rem 0;
+  font-size: 0.93rem;
+}
+
+table th {
+  background-color: rgba(255, 255, 255, 0.04);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+table tr:last-child td {
+  border-bottom: none;
 }
