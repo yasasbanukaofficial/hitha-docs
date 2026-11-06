@@ -19,6 +19,7 @@ Background tasks in HITHA are orchestrated using ShedLock and Spring's `@Schedul
       nodes={schedulersNodes}
       edges={schedulersEdges}
       height={380}
+      scenario="Scenario: Running automated maintenance tasks across clustered nodes"
       caption="Distributed Job Orchestration: Leader node acquires ShedLock mutex before spawning non-blocking virtual threads for LOG-05 archival and queue dispatching."
       direction="LR"
     />

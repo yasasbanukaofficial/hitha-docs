@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import { useHistory } from '@docusaurus/router';
 import catalogData from '../data/searchCatalog.json';
-import { Search, X, Hash, ArrowRight, CornerDownLeft, FileText, Layers, Shield, Stethoscope, DollarSign, Terminal } from 'lucide-react';
+import { Search, X, Hash, ArrowRight, CornerDownLeft, FileText, Layers, Shield, Stethoscope, DollarSign, Terminal, Clock } from 'lucide-react';
 
 interface Heading {
   title: string;
@@ -19,20 +19,29 @@ interface DocItem {
 }
 
 const CATEGORY_ICONS: Record<string, React.ReactNode> = {
-  Overview: <Layers className="w-4 h-4 text-emerald-400" />,
-  Logging: <Terminal className="w-4 h-4 text-amber-400" />,
-  'Logging Audit': <Terminal className="w-4 h-4 text-amber-400" />,
-  Security: <Shield className="w-4 h-4 text-rose-400" />,
-  Clinical: <Stethoscope className="w-4 h-4 text-cyan-400" />,
-  Financial: <DollarSign className="w-4 h-4 text-emerald-400" />,
-  Reference: <FileText className="w-4 h-4 text-indigo-400" />,
-  'Engineering Timeline': <Layers className="w-4 h-4 text-violet-400" />,
+  Overview: <Layers className="w-4 h-4 text-emerald-500" />,
+  Logging: <Terminal className="w-4 h-4 text-amber-500" />,
+  'Logging Audit': <Terminal className="w-4 h-4 text-amber-500" />,
+  Security: <Shield className="w-4 h-4 text-rose-500" />,
+  Clinical: <Stethoscope className="w-4 h-4 text-cyan-500" />,
+  Financial: <DollarSign className="w-4 h-4 text-emerald-500" />,
+  Reference: <FileText className="w-4 h-4 text-indigo-500" />,
+  'Engineering Timeline': <Clock className="w-4 h-4 text-violet-500" />,
 };
 
 interface SearchModalProps {
   isOpen: boolean;
   onClose: () => void;
 }
+
+const FILTER_CATEGORIES = [
+  { id: 'ALL', label: 'All' },
+  { id: 'Clinical', label: 'Clinical' },
+  { id: 'Security', label: 'Security' },
+  { id: 'Logging Audit', label: 'Logging & Audit' },
+  { id: 'Financial', label: 'Financial' },
+  { id: 'Reference', label: 'Reference' },
+];
 
 export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps): React.JSX.Element | null {
   const [query, setQuery] = useState('');
@@ -42,11 +51,9 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
   const inputRef = useRef<HTMLInputElement>(null);
   const resultsRef = useRef<HTMLDivElement>(null);
 
-  const categories = ['ALL', 'Logging Audit', 'Security', 'Clinical', 'Financial', 'Reference'];
-
   useEffect(() => {
     if (isOpen) {
-      setTimeout(() => inputRef.current?.focus(), 50);
+      setTimeout(() => inputRef.current?.focus(), 60);
       setSelectedIndex(0);
       document.body.style.overflow = 'hidden';
     } else {
@@ -58,7 +65,7 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
   }, [isOpen]);
 
   // Filter items based on query & category
-  const filteredItems: DocItem[] = React.useMemo(() => {
+  const filteredItems: DocItem[] = useMemo(() => {
     const q = query.trim().toLowerCase();
     return (catalogData as DocItem[]).filter((item) => {
       if (selectedCategory !== 'ALL' && item.category !== selectedCategory) {
@@ -77,7 +84,7 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
     setSelectedIndex(0);
   }, [query, selectedCategory]);
 
-  // Keyboard navigation
+  // Keyboard navigation & Focus Trap
   useEffect(() => {
     if (!isOpen) return;
 
@@ -108,15 +115,26 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
     history.push(url);
   };
 
+  // Helper to highlight matching text
+  const highlightMatch = (text: string, q: string) => {
+    if (!q) return text;
+    const parts = text.split(new RegExp(`(${q})`, 'gi'));
+    return parts.map((part, i) =>
+      part.toLowerCase() === q.toLowerCase() ? (
+        <mark key={i} className="search-highlight">{part}</mark>
+      ) : (
+        part
+      )
+    );
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="search-backdrop" onClick={onClose}>
+    <div className="search-backdrop" onClick={onClose} role="dialog" aria-modal="true">
       <div 
         className="search-modal"
         onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
       >
         {/* Search Input Bar */}
         <div className="search-header">
@@ -125,30 +143,41 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
             ref={inputRef}
             type="text"
             className="search-modal-input"
-            placeholder="Search architecture, concepts, SQL queries, or Sinhala guides..."
+            placeholder="Search architecture, diagrams, scenarios, or concepts..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
+            aria-label="Search documentation"
           />
           {query ? (
-            <button className="search-clear-btn" onClick={() => setQuery('')}>
+            <button
+              type="button"
+              className="search-clear-btn"
+              onClick={() => setQuery('')}
+              aria-label="Clear query"
+            >
               <X className="w-4 h-4" />
             </button>
           ) : (
-            <div className="search-shortcut-badge">ESC to close</div>
+            <div className="search-shortcut-badge">ESC</div>
           )}
         </div>
 
-        {/* Quick Filter Categories */}
+        {/* High-Contrast Quick Filter Categories Bar (Rule 4) */}
         <div className="search-category-filter">
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              className={`search-filter-pill ${selectedCategory === cat ? 'active' : ''}`}
-              onClick={() => setSelectedCategory(cat)}
-            >
-              {cat}
-            </button>
-          ))}
+          {FILTER_CATEGORIES.map((cat) => {
+            const isActive = selectedCategory === cat.id;
+            return (
+              <button
+                key={cat.id}
+                type="button"
+                className={`search-filter-pill ${isActive ? 'active' : ''}`}
+                onClick={() => setSelectedCategory(cat.id)}
+                aria-pressed={isActive}
+              >
+                <span>{cat.label}</span>
+              </button>
+            );
+          })}
         </div>
 
         {/* Search Results List */}
@@ -156,7 +185,9 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
           {filteredItems.length === 0 ? (
             <div className="search-no-results">
               <p className="no-res-title">No matching architecture documents found</p>
-              <p className="no-res-subtitle">Try searching for keywords like "hash chain", "dual plane", "rate limit", "escrow", or "webrtc".</p>
+              <p className="no-res-subtitle">
+                Try searching for real-life flows: <strong>payment</strong>, <strong>emergency queue</strong>, <strong>rate limiting</strong>, or <strong>outbox</strong>.
+              </p>
             </div>
           ) : (
             filteredItems.map((item, idx) => {
@@ -176,11 +207,13 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
                     <span className="search-item-route">{item.route}</span>
                   </div>
 
-                  <h4 className="search-item-title">{item.title}</h4>
+                  <h4 className="search-item-title">
+                    {highlightMatch(item.title, query.trim())}
+                  </h4>
 
                   {/* Snippet preview */}
                   <p className="search-item-snippet">
-                    {item.preview.slice(0, 160)}...
+                    {highlightMatch(item.preview.slice(0, 160) + '...', query.trim())}
                   </p>
 
                   {/* Section sub-links */}
@@ -189,6 +222,7 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
                       {item.headings.slice(0, 3).map((h) => (
                         <button
                           key={h.slug}
+                          type="button"
                           className="search-heading-pill"
                           onClick={(e) => {
                             e.stopPropagation();
@@ -222,7 +256,7 @@ export default function CommandSearchModal({ isOpen, onClose }: SearchModalProps
             <span><kbd className="search-kbd">ESC</kbd> Close</span>
           </div>
           <div className="search-footer-count">
-            {filteredItems.length} {filteredItems.length === 1 ? 'doc' : 'docs'} indexed
+            {filteredItems.length} {filteredItems.length === 1 ? 'guide' : 'guides'} found
           </div>
         </div>
       </div>

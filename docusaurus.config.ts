@@ -63,29 +63,14 @@ const config: Config = {
       title: 'HITHA',
       items: [
         {
-          to: '/docs/clinical/livekit-webrtc',
+          to: '/docs',
           position: 'left',
-          label: 'Guides',
+          label: 'Docs',
         },
         {
-          to: '/docs/clinical/livekit-webrtc',
-          position: 'left',
-          label: 'SDKs',
-        },
-        {
-          to: '/docs/clinical/livekit-webrtc',
+          to: '/api',
           position: 'left',
           label: 'REST API',
-        },
-        {
-          to: '/docs/clinical/livekit-webrtc',
-          position: 'left',
-          label: 'Resources',
-        },
-        {
-          to: '/docs/clinical/livekit-webrtc',
-          position: 'left',
-          label: 'Support',
         },
         {
           href: 'https://github.com/yasasbanukaofficial/hitha-docs',

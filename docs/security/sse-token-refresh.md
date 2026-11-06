@@ -19,6 +19,7 @@ Real-time clinical updates (doctor ringing alerts, in-call extension requests, w
       nodes={sseRefreshNodes}
       edges={sseRefreshEdges}
       height={380}
+      scenario="Scenario: Maintaining live updates and refreshing tokens without dropouts"
       caption="Server-Sent Events & Token Refresh: Persistent HTTP stream with 30s heartbeats and background JWT auto-refresh extending sliding 15-minute access TTL."
       direction="LR"
     />

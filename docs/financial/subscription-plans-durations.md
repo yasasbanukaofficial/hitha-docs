@@ -19,6 +19,7 @@ HITHA provides structured telehealth tiers for individuals, families, and enterp
       nodes={subscriptionPlansNodes}
       edges={subscriptionPlansEdges}
       height={380}
+      scenario="Scenario: Validating plan entitlements and extending in-call durations"
       caption="Subscription & Duration Flow: Bucket4j validates plan entitlement; LiveKit SFU provisions session with 15m/30m/45m expiry and +15m mid-call extension."
       direction="LR"
     />

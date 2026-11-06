@@ -19,6 +19,7 @@ To protect PostgreSQL 16 from high-frequency queries and maintain sub-50ms API r
       nodes={cachingNodes}
       edges={cachingEdges}
       height={380}
+      scenario="Scenario: Answering high-frequency queries from cache to protect database"
       caption="Multi-Tier Caching Flow: L1 Caffeine micro-cache handles high-frequency reads in RAM; L2 Redis Cluster with Redisson mutex locking shields the primary PostgreSQL database."
       direction="LR"
     />

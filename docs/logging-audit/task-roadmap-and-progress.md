@@ -19,6 +19,7 @@ This document outlines the architectural lifecycle of audit log storage, cold da
       nodes={log05Nodes}
       edges={log05Edges}
       height={380}
+      scenario="Scenario: Old audit records move to cold storage and an auditor verifies them later"
       caption="LOG-05 Archival Pipeline: Historical audit records (>90 days) are streamed to GZIP-compressed .jsonl.gz archives with SHA-256 manifests uploaded to Cloudflare R2."
       direction="LR"
     />

@@ -5,9 +5,27 @@ sidebar_label: Architecture Terms Dictionary
 slug: /reference/technical-terms-dictionary
 ---
 
+import BrowserOnly from '@docusaurus/BrowserOnly';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { heroNodes, heroEdges, heroSteps } from '@site/src/components/FlowDiagram/diagramData';
+
 # Technical Terms & Architecture Glossary
 
 This glossary defines core distributed systems, database, and telemetry terminology used across the HITHA engineering platform. Each term includes an everyday engineering analogy, its concrete operational definition, and its direct codebase implementation.
+
+<BrowserOnly fallback={<div style={{ height: '400px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={heroNodes}
+      edges={heroEdges}
+      steps={heroSteps}
+      height={400}
+      scenario="Scenario: Distributed terminology execution lifecycle across all system tiers"
+      caption="Figure 8.0: High-Level Architecture Topology Mapping Key Engineering Terminology"
+      direction="LR"
+    />
+  )}
+</BrowserOnly>
 
 ---
 

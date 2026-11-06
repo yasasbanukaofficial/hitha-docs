@@ -35,6 +35,7 @@ Telehealth systems generate millions of high-frequency debug, connection pool, a
       edges={dualPlaneHeroEdges}
       steps={dualPlaneHeroSteps}
       height={420}
+      scenario="Scenario: Enterprise Dual-Plane Logging & Compliance Storage Lifecycle"
       caption="HERO: Enterprise Dual-Plane Logging & Compliance Storage Lifecycle"
     />
   )}
@@ -60,6 +61,7 @@ Incoming HTTP traffic passes through `CorrelationIdFilter`, enriching threads wi
       edges={log01Edges}
       steps={log01Steps}
       height={360}
+      scenario="Scenario: A patient opens the doctor list while the server is busy"
       caption="LOG-01: Non-blocking AsyncAppender ring buffer with automated GZIP eviction"
     />
   )}
@@ -86,6 +88,7 @@ Incoming requests are enriched with 5 MDC diagnostic dimensions (`correlationId`
       nodes={log02Nodes}
       edges={log02Edges}
       height={340}
+      scenario="Scenario: A doctor edits a prescription at the same instant an admin changes a role"
       caption="LOG-02: ReentrantLock guarding cryptographic chain calculation under Virtual Threads"
     />
   )}
@@ -110,6 +113,7 @@ When massive bursts of concurrent Java 21 Virtual Threads execute transactions, 
       nodes={log03Nodes}
       edges={log03Edges}
       height={340}
+      scenario="Scenario: A bot hammers the login endpoint while real patients keep booking"
       caption="LOG-03: In-memory sliding window protecting HikariCP pool from unauthenticated floods"
     />
   )}
@@ -134,6 +138,7 @@ Unauthenticated 401 floods could exhaust the database connection pool if every i
       nodes={log04Nodes}
       edges={log04Edges}
       height={340}
+      scenario="Scenario: An admin opens the activity dashboard"
       caption="LOG-04: 18MB BRIN index replacement and 60-second in-memory stats cache"
     />
   )}
@@ -159,6 +164,7 @@ The bulky 12GB GIN index on audit payloads was dropped and replaced with an 18MB
       nodes={log05Nodes}
       edges={log05Edges}
       height={340}
+      scenario="Scenario: Old audit records move to cold storage and an auditor verifies them later"
       caption="LOG-05: Streaming cold archiver to Cloudflare R2 with SHA-256 manifests"
     />
   )}

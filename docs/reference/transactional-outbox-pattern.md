@@ -20,6 +20,7 @@ In a distributed telehealth platform, database state changes (e.g. confirming a 
       edges={outboxEdges}
       steps={outboxSteps}
       height={400}
+      scenario="Scenario: Guaranteeing notification delivery without database locking"
       caption="Transactional Outbox Pattern: Spring Boot mutates entity + outbox_events in 1 ACID transaction, polled by ShedLock workers with DLQ quarantine."
       direction="LR"
     />

@@ -19,6 +19,7 @@ Writing and dispensing medical prescriptions requires strict data isolation to c
       nodes={prescriptionsCatalogNodes}
       edges={prescriptionsCatalogEdges}
       height={380}
+      scenario="Scenario: Issuing a digital prescription with zero sensitive health data in logs"
       caption="Zero-PHI Prescription Pipeline: Doctor selects medications from NMRA formulary; SHA-256 masking strips patient identity prior to logging and vault encryption."
       direction="LR"
     />

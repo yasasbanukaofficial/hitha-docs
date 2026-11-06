@@ -6,14 +6,25 @@ slug: /clinical/livekit-webrtc
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import ServerIntegrationFlow from '@site/src/components/ServerIntegrationFlow';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { livekitIntegrationNodes, livekitIntegrationEdges, livekitIntegrationSteps } from '@site/src/components/FlowDiagram/diagramData';
 
 # Server Integration
 
 Now that you have your HITHA API Key, you can move on to integrating HITHA's REST APIs with your server code. This interactive diagram walks you through the flow request of starting a Voice & Video Consultation call via HITHA.
 
-<BrowserOnly fallback={<div style={{ height: '460px', background: '#f8fbff', borderRadius: '16px' }} />}>
-  {() => <ServerIntegrationFlow />}
+<BrowserOnly fallback={<div style={{ height: '440px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={livekitIntegrationNodes}
+      edges={livekitIntegrationEdges}
+      steps={livekitIntegrationSteps}
+      height={440}
+      scenario="Scenario: Establishing a real-time WebRTC audio/video consultation"
+      caption="Figure 4.0: LiveKit SFU Consultation Handshake & Media Session Establishment"
+      direction="LR"
+    />
+  )}
 </BrowserOnly>
 
 It all starts with creating a meeting which is needed to start a live video call. After a meeting has been created on HITHA's server, you can now add participants to the meeting. Each participant is given an `authToken` which is necessary for your client side to further interact with the meeting.

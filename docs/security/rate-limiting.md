@@ -20,6 +20,7 @@ To shield HITHA's Spring Boot backend from brute-force authentication attacks, s
       edges={rateLimitingEdges}
       steps={rateLimitingSteps}
       height={420}
+      scenario="Scenario: Three kinds of visitors hit the API"
       caption="Figure 2.1: Distributed Token Bucket Rate Limiting Architecture"
     />
   )}

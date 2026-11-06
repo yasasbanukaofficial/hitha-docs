@@ -20,6 +20,7 @@ Senior-level architectural answers to tough technical questions regarding concur
       edges={heroEdges}
       steps={heroSteps}
       height={400}
+      scenario="Scenario: Handling patient requests across operational and legal compliance tiers"
       caption="Architecture Defense: Dual-plane separation guarantees that high-frequency operational logs never degrade PostgreSQL ACID transactions or HikariCP connection pools."
       direction="LR"
     />

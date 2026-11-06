@@ -6,14 +6,25 @@ slug: /clinical/on-demand-queue
 ---
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
-import OnDemandQueueFlow from '@site/src/components/OnDemandQueueFlow';
+import FlowDiagram from '@site/src/components/FlowDiagram';
+import { onDemandNodes, onDemandEdges, onDemandSteps } from '@site/src/components/FlowDiagram/diagramData';
 
 # Emergency Doctor Dispatch & On-Demand Queue
 
 Patients in crisis require immediate psychiatric or psychological attention without booking days in advance. HITHA's **On-Demand Dispatch Engine** pairs patients with active on-duty doctors within seconds.
 
-<BrowserOnly fallback={<div style={{ height: '360px', background: '#f8fbff', borderRadius: '16px' }} />}>
-  {() => <OnDemandQueueFlow />}
+<BrowserOnly fallback={<div style={{ height: '420px', background: '#f8fbff', borderRadius: '16px' }} />}>
+  {() => (
+    <FlowDiagram
+      nodes={onDemandNodes}
+      edges={onDemandEdges}
+      steps={onDemandSteps}
+      height={420}
+      scenario="Scenario: An emergency patient requests an instant doctor consultation"
+      caption="Figure 5.0: Pessimistic Row Lock Doctor Dispatch & Acceptance Window (45s Timer)"
+      direction="LR"
+    />
+  )}
 </BrowserOnly>
 
 It all starts with a patient initiating an emergency consultation call from the mobile application. The dispatch scheduler evaluates doctor duty pools in Redis and applies database row-level locking to guarantee zero race conditions.

@@ -19,6 +19,7 @@ High-throughput clinical and audit logging tables accumulate millions of records
       nodes={indexingNodes}
       edges={indexingEdges}
       height={380}
+      scenario="Scenario: Searching 10 million audit records in under 5 milliseconds"
       caption="PostgreSQL BRIN Optimization: 18MB index footprint summarizes block ranges, achieving 2,800 writes/sec and sub-5ms range scans across 10M records."
       direction="LR"
     />

@@ -134,6 +134,7 @@ export default function InteractiveTopologyFlow(): React.JSX.Element {
       nodes={topologyNodes}
       edges={topologyEdges}
       steps={topologySteps}
+      scenario="Scenario: End-to-end request lifecycle across all 6 core infrastructure layers"
       height={460}
       caption="Interactive Healthcare Architecture Topology: Spring Boot 3.3 orchestrating Redis, PostgreSQL, LiveKit SFU, and Cloudflare R2 without minimap clutter."
       direction="LR"

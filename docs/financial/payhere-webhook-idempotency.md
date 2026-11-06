@@ -7,19 +7,21 @@ slug: /financial/payhere-webhook-idempotency
 
 import BrowserOnly from '@docusaurus/BrowserOnly';
 import FlowDiagram from '@site/src/components/FlowDiagram';
-import { payhereWebhookNodes, payhereWebhookEdges } from '@site/src/components/FlowDiagram/diagramData';
+import { paymentFlowNodes, paymentFlowEdges, paymentFlowSteps } from '@site/src/components/FlowDiagram/diagramData';
 
 # PayHere Payment Gateway, Webhooks & Idempotency
 
 HITHA integrates with PayHere to accept local credit/debit cards, FriMi, and bank transfers across Sri Lanka. Because payment gateway webhooks can be retried multiple times or delivered out-of-order over unreliable networks, strict cryptographic verification and database idempotency keys are enforced.
 
-<BrowserOnly fallback={<div style={{ height: '380px', background: '#f8fbff', borderRadius: '16px' }} />}>
+<BrowserOnly fallback={<div style={{ height: '440px', background: '#f8fbff', borderRadius: '16px' }} />}>
   {() => (
     <FlowDiagram
-      nodes={payhereWebhookNodes}
-      edges={payhereWebhookEdges}
-      height={380}
-      caption="PayHere Webhook Idempotency: MD5 signature verification combined with PostgreSQL row lock prevents duplicate ledger credits on webhook network retries."
+      nodes={paymentFlowNodes}
+      edges={paymentFlowEdges}
+      steps={paymentFlowSteps}
+      scenario="Scenario: A patient pays for a consultation"
+      height={440}
+      caption="PayHere Payment Pipeline: Patient fee is validated with MD5 cryptographic signature, row-locked in PostgreSQL to prevent duplicate credits, and held in escrow."
       direction="LR"
     />
   )}
@@ -50,7 +52,7 @@ public boolean verifyPayHereSignature(PayHereWebhookRequest request) {
 
 ## 2. Idempotent Processing Flow
 
-1. **Lock on Payment Intent**: When the webhook arrives at `POST /api/v1/payments/payhere/notify`, `PaymentWebhookService` executes a pessimistic lookup on the `payments` table matching `order_id`.
+1. **Lock on Payment Intent**: When the webhook arrives at the notification endpoint, the system executes an exclusive row lookup on the `payments` table matching `order_id`.
 2. **Duplicate Detection**:
    - If the payment state is already `COMPLETED`, the handler immediately returns `HTTP 200 OK` without modifying ledger balances or re-triggering notifications.
    - If `PENDING`, the state transitions to `COMPLETED`, holding the amount in the doctor's escrow wallet.

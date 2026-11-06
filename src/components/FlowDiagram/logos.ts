@@ -65,4 +65,44 @@ export const LOGO_REGISTRY: Record<string, LogoItem> = {
     src: '/img/logos/payhere.svg',
     color: '#0284C7',
   },
+  patient: {
+    name: 'Patient',
+    src: '/img/logos/patient.svg',
+    color: '#3B82F6',
+  },
+  doctor: {
+    name: 'Doctor',
+    src: '/img/logos/doctor.svg',
+    color: '#16A34A',
+  },
+  admin: {
+    name: 'Admin',
+    src: '/img/logos/admin.svg',
+    color: '#00A8B5',
+  },
+  superadmin: {
+    name: 'Super Admin',
+    src: '/img/logos/superadmin.svg',
+    color: '#EAB308',
+  },
+  bot: {
+    name: 'Attacker Bot',
+    src: '/img/logos/bot.svg',
+    color: '#DC2626',
+  },
+  auditor: {
+    name: 'Auditor',
+    src: '/img/logos/auditor.svg',
+    color: '#475569',
+  },
+  archive: {
+    name: 'Archive Job',
+    src: '/img/logos/archive.svg',
+    color: '#D97706',
+  },
+  lock: {
+    name: 'Gate Lock',
+    src: '/img/logos/lock.svg',
+    color: '#0F172A',
+  },
 };

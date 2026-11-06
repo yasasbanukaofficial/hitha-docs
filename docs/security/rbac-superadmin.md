@@ -19,6 +19,7 @@ HITHA enforces strict role boundaries across patients, verified doctors, support
       nodes={rbacNodes}
       edges={rbacEdges}
       height={380}
+      scenario="Scenario: Enforcing role hierarchy and pseudonymous user identity"
       caption="RBAC & Governance Pipeline: Spring Security evaluates role hierarchy while pseudonymous masking eliminates sensitive identity traces from compliance audit records."
       direction="LR"
     />

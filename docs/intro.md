@@ -20,6 +20,7 @@ Welcome to the **HITHA Healthcare Engineering & Architecture Portal**. This docu
       edges={heroEdges}
       steps={heroSteps}
       height={420}
+      scenario="Scenario: Patient and Doctor connecting through HITHA Distributed Healthcare Topology"
       caption="HITHA Distributed System Topology: Client apps connect through Spring Boot 3.3 virtual threads, orchestrated with Redis 7.2 presence, PostgreSQL 16 ACID storage, LiveKit SFU, and Cloudflare R2 7-year WORM archival."
       direction="LR"
     />

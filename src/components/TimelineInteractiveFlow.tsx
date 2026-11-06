@@ -147,8 +147,9 @@ export default function TimelineInteractiveFlow(): React.JSX.Element {
     <FlowDiagram
       initialNodes={initialNodes}
       initialEdges={initialEdges}
-      height={320}
+      height={340}
       steps={steps}
+      scenario="Scenario: Step-by-step verification of engineering deliverables merged on Nov 06, 2026"
       caption="Interactive Engineering Delivery Ledger (Friday, November 06, 2026)"
     />
   );
