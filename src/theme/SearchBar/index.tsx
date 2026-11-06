@@ -7,7 +7,14 @@ export default function CustomNavbarSearchBar(): React.JSX.Element {
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        setIsOpen(true);
+      } else if (
+        e.key === '/' && 
+        document.activeElement?.tagName !== 'INPUT' && 
+        document.activeElement?.tagName !== 'TEXTAREA'
+      ) {
         e.preventDefault();
         setIsOpen(true);
       }
@@ -17,21 +24,21 @@ export default function CustomNavbarSearchBar(): React.JSX.Element {
   }, []);
 
   return (
-    <>
+    <div className="navbar-search-wrapper">
       <button 
         type="button"
         className="navbar-search-trigger"
         onClick={() => setIsOpen(true)}
         aria-label="Search documentation"
       >
-        <Search className="w-4 h-4 text-emerald-400 opacity-80" />
-        <span className="navbar-search-text">Search architecture...</span>
-        <span className="navbar-search-kbd">
+        <Search className="navbar-search-icon" />
+        <span className="navbar-search-placeholder">Search</span>
+        <span className="navbar-search-shortcut">
           <kbd>⌘K</kbd>
         </span>
       </button>
 
       <CommandSearchModal isOpen={isOpen} onClose={() => setIsOpen(false)} />
-    </>
+    </div>
   );
 }
