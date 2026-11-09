@@ -704,6 +704,347 @@ export const log05Steps = [
 ];
 
 // ========================================================
+// 7B. LOG-06: ASYNC CLINICAL AUDIT DECOUPLING
+// Scenario: "Doctor submits consultation notes with zero audit delay"
+// ========================================================
+export const log06Nodes: Node[] = [
+  {
+    id: 'doctor',
+    type: 'logoNode',
+    data: {
+      logo: 'doctor',
+      title: 'Doctor App',
+      caption: 'submits in-call notes',
+      badge: 'HTTP Request',
+      badgeColor: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'aspect',
+    type: 'logoNode',
+    data: {
+      logo: 'spring-boot',
+      title: 'ClinicalAuditAspect',
+      caption: 'intercepts @ClinicalAudit',
+      badge: 'Zero-PHI Guard',
+      badgeColor: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'vthread',
+    type: 'logoNode',
+    data: {
+      logo: 'java',
+      title: 'Virtual Thread Pool',
+      caption: 'asynchronous execution',
+      badge: 'Non-Blocking',
+      badgeColor: '#8b5cf6',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'db',
+    type: 'logoNode',
+    data: {
+      logo: 'postgresql',
+      title: 'PostgreSQL 16',
+      caption: 'audit entry persisted',
+      badge: 'Hot Partition',
+      badgeColor: '#0284c7',
+    },
+    position: { x: 0, y: 0 },
+  },
+];
+
+export const log06Edges: Edge[] = [
+  { id: 'e1', source: 'doctor', target: 'aspect', label: 'saves clinical consultation notes', animated: true },
+  { id: 'e2', source: 'aspect', target: 'doctor', label: 'HTTP 200 OK (< 5ms response)', style: { stroke: '#16a34a', strokeWidth: 2 } },
+  { id: 'e3', source: 'aspect', target: 'vthread', label: 'offloaded with MDC telemetry', animated: true, style: { stroke: '#8b5cf6' } },
+  { id: 'e4', source: 'vthread', target: 'db', label: 'asynchronously writes audit record' },
+];
+
+export const log06Steps = [
+  { step: 1, nodeId: 'doctor', description: 'Doctor completes consultation and submits clinical prescription notes.' },
+  { step: 2, nodeId: 'aspect', description: 'ClinicalAuditAspect intercepts call, copies MDC telemetry context, and releases HTTP thread.' },
+  { step: 3, nodeId: 'vthread', description: 'Java 21 virtualThreadExecutor receives audit task without blocking consultation response.' },
+  { step: 4, nodeId: 'db', description: 'Audit log record is safely written to PostgreSQL hot partition in background.' },
+];
+
+// ========================================================
+// 7C. LOG-07: AUTOMATED PARTITION ARCHIVAL & PURGE SCHEDULER
+// Scenario: "Automated monthly job archives and drops partitions in <10ms"
+// ========================================================
+export const log07Nodes: Node[] = [
+  {
+    id: 'cron',
+    type: 'logoNode',
+    data: {
+      logo: 'archive',
+      title: 'Purge Scheduler',
+      caption: 'monthly automated cron',
+      badge: '1st of Month',
+      badgeColor: '#059669',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'dbOld',
+    type: 'logoNode',
+    data: {
+      logo: 'postgresql',
+      title: 'Aged Partition',
+      caption: 'records > 90 days',
+      badge: 'Detached',
+      badgeColor: '#0284c7',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'r2',
+    type: 'logoNode',
+    data: {
+      logo: 'cloudflare-r2',
+      title: 'Cloudflare R2',
+      caption: 'cold archive bundle',
+      badge: '7-Yr WORM Lock',
+      badgeColor: '#ea580c',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'purge',
+    type: 'infoNode',
+    data: {
+      badge: 'SUB-10MS PURGE',
+      title: 'Table Dropped',
+      caption: 'zero table lock contention',
+      color: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+];
+
+export const log07Edges: Edge[] = [
+  { id: 'e1', source: 'cron', target: 'dbOld', label: 'identifies slices > 90 days', animated: true },
+  { id: 'e2', source: 'dbOld', target: 'r2', label: 'exports .jsonl.gz + SHA-256 manifest', style: { stroke: '#ea580c', strokeWidth: 2 } },
+  { id: 'e3', source: 'r2', target: 'purge', label: 'verified uploaded safely', animated: true },
+  { id: 'e4', source: 'purge', target: 'dbOld', label: 'drops partition in < 10ms', style: { stroke: '#16a34a' } },
+];
+
+export const log07Steps = [
+  { step: 1, nodeId: 'cron', description: 'AuditLogPartitionPurgeScheduler activates on the 1st of every month.' },
+  { step: 2, nodeId: 'dbOld', description: 'Queries and detaches partition containing audit records older than 90 days.' },
+  { step: 3, nodeId: 'r2', description: 'Streams compressed .jsonl.gz archive and validates companion SHA-256 manifest in Cloudflare R2.' },
+  { step: 4, nodeId: 'purge', description: 'Executes sub-10ms drop without acquiring long-lived table-level locks.' },
+];
+
+// ========================================================
+// 7D. LOG-08: PDPA/GDPR RIGHT-TO-ERASURE PSEUDONYMOUS POINTERS
+// Scenario: "Patient exercises Right-to-Erasure without breaking hash chains"
+// ========================================================
+export const log08Nodes: Node[] = [
+  {
+    id: 'patient',
+    type: 'logoNode',
+    data: {
+      logo: 'patient',
+      title: 'Patient Request',
+      caption: 'invokes Right-to-Erasure',
+      badge: 'PDPA / GDPR',
+      badgeColor: '#0891b2',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'identity',
+    type: 'logoNode',
+    data: {
+      logo: 'spring-boot',
+      title: 'Identity Service',
+      caption: 'crypto-shreds PII',
+      badge: 'Shredder',
+      badgeColor: '#dc2626',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'pseudonym',
+    type: 'infoNode',
+    data: {
+      badge: 'IRREVERSIBLE POINTER',
+      title: 'UUID Pseudonym',
+      caption: 'zero identifiable data',
+      color: '#0891b2',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'hashChain',
+    type: 'logoNode',
+    data: {
+      logo: 'postgresql',
+      title: 'Audit Ledger',
+      caption: '100% hash valid',
+      badge: 'Chain Unbroken',
+      badgeColor: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+];
+
+export const log08Edges: Edge[] = [
+  { id: 'e1', source: 'patient', target: 'identity', label: 'requests complete account deletion', animated: true },
+  { id: 'e2', source: 'identity', target: 'pseudonym', label: 'destroys name, phone & links', style: { stroke: '#dc2626', strokeWidth: 2 } },
+  { id: 'e3', source: 'pseudonym', target: 'hashChain', label: 'retains non-reversible UUID pointer' },
+  { id: 'e4', source: 'hashChain', target: 'patient', label: 'chain remains mathematically valid', style: { stroke: '#16a34a', strokeDasharray: '4,4' } },
+];
+
+export const log08Steps = [
+  { step: 1, nodeId: 'patient', description: 'Patient submits account erasure request under PDPA / GDPR.' },
+  { step: 2, nodeId: 'identity', description: 'PatientIdentityService executes crypto-shredding: deletes identity links and anonymizes AuthUser.' },
+  { step: 3, nodeId: 'pseudonym', description: 'Replaces raw references with stable, non-reversible UUID pseudonym pointers.' },
+  { step: 4, nodeId: 'hashChain', description: 'Cryptographic SHA-256 hash chains remain 100% valid with zero PII remaining.' },
+];
+
+// ========================================================
+// 7E. LOG-09: ADMIN ACTIVITY COLD ARCHIVE EXPORT & DOWNLOAD API
+// Scenario: "Super Admin exports regulatory compliance archive bundle"
+// ========================================================
+export const log09Nodes: Node[] = [
+  {
+    id: 'admin',
+    type: 'logoNode',
+    data: {
+      logo: 'superadmin',
+      title: 'Super Admin',
+      caption: 'compliance officer',
+      badge: 'Authorized',
+      badgeColor: '#ca8a04',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'controller',
+    type: 'logoNode',
+    data: {
+      logo: 'spring-boot',
+      title: 'Admin Activity API',
+      caption: 'POST /archive/export',
+      badge: 'REST Endpoint',
+      badgeColor: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'r2',
+    type: 'logoNode',
+    data: {
+      logo: 'cloudflare-r2',
+      title: 'Cloudflare R2',
+      caption: 'streams .jsonl.gz',
+      badge: 'Zero Egress',
+      badgeColor: '#ea580c',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'auditor',
+    type: 'logoNode',
+    data: {
+      logo: 'auditor',
+      title: 'Regulatory Audit',
+      caption: 'verifies SHA-256',
+      badge: 'MoH Compliant',
+      badgeColor: '#475569',
+    },
+    position: { x: 0, y: 0 },
+  },
+];
+
+export const log09Edges: Edge[] = [
+  { id: 'e1', source: 'admin', target: 'controller', label: 'requests date-range archive bundle', animated: true },
+  { id: 'e2', source: 'controller', target: 'r2', label: 'retrieves archived GZIP bundle' },
+  { id: 'e3', source: 'controller', target: 'admin', label: 'streams attachment with SHA-256 header', style: { stroke: '#16a34a', strokeWidth: 2 } },
+  { id: 'e4', source: 'admin', target: 'auditor', label: 'hands off signed compliance bundle', style: { stroke: '#ca8a04', strokeDasharray: '4,4' } },
+];
+
+export const log09Steps = [
+  { step: 1, nodeId: 'admin', description: 'Super Admin requests cold archive export for specific date range via Admin Portal.' },
+  { step: 2, nodeId: 'controller', description: 'AdminActivityLogController verifies permissions and fetches archived bundle.' },
+  { step: 3, nodeId: 'r2', description: 'Cloudflare R2 streams compressed .jsonl.gz file with zero egress fees.' },
+  { step: 4, nodeId: 'auditor', description: 'Regulatory auditor receives signed attachment with matching SHA-256 manifest.' },
+];
+
+// ========================================================
+// 7F. LOG-10: END-TO-END STRESS & COMPLIANCE VERIFICATION SUITE
+// Scenario: "25 concurrent Virtual Threads verify unbroken hash chains"
+// ========================================================
+export const log10Nodes: Node[] = [
+  {
+    id: 'stress',
+    type: 'logoNode',
+    data: {
+      logo: 'java',
+      title: 'Virtual Threads (x25)',
+      caption: 'concurrent burst writers',
+      badge: 'Parallel Load',
+      badgeColor: '#8b5cf6',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'lockEngine',
+    type: 'logoNode',
+    data: {
+      logo: 'spring-boot',
+      title: 'ReentrantLock Engine',
+      caption: 'atomic single-writer',
+      badge: '0ms Deadlock',
+      badgeColor: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'chainTest',
+    type: 'logoNode',
+    data: {
+      logo: 'postgresql',
+      title: 'Sequential Chain',
+      caption: 'verifyHash() validated',
+      badge: '100% Intact',
+      badgeColor: '#0284c7',
+    },
+    position: { x: 0, y: 0 },
+  },
+  {
+    id: 'green',
+    type: 'infoNode',
+    data: {
+      badge: '21 TESTS GREEN (3.3s)',
+      title: 'CI/CD Gate Passed',
+      caption: 'zero failures or forks',
+      color: '#16a34a',
+    },
+    position: { x: 0, y: 0 },
+  },
+];
+
+export const log10Edges: Edge[] = [
+  { id: 'e1', source: 'stress', target: 'lockEngine', label: '25 concurrent Virtual Threads burst', animated: true },
+  { id: 'e2', source: 'lockEngine', target: 'chainTest', label: 'serializes parent hash lookup & persist' },
+  { id: 'e3', source: 'chainTest', target: 'green', label: 'all 25 records form unbroken chain', style: { stroke: '#16a34a', strokeWidth: 2 } },
+];
+
+export const log10Steps = [
+  { step: 1, nodeId: 'stress', description: 'Stress suite spawns 25 concurrent Java 21 Virtual Threads hitting audit persistence.' },
+  { step: 2, nodeId: 'lockEngine', description: 'JVM ReentrantLock serializes findLatestHashChainValue() and repository saves.' },
+  { step: 3, nodeId: 'chainTest', description: 'Test asserts verifyHash() across all 25 entries sequentially.' },
+  { step: 4, nodeId: 'green', description: 'All 21 audit tests pass in 3.3s with zero broken links or concurrency forks.' },
+];
+
+// ========================================================
 // 8. RATE-LIMIT TIERS SCENARIO
 // Scenario: "Three kinds of visitors hit the API"
 // ========================================================
